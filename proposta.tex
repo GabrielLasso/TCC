@@ -1,0 +1,50 @@
+\documentclass[a4paper]{article}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsthm}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{Big Line Big Clique conjecture e bloqueadores de visibilidade}
+\author{Gabriel K. Lasso}
+\date{}
+
+\newtheorem*{bigline}{Big Line Big Clique conjecture}
+\newtheorem*{bloqueadores}{Bloqueadores de visibilidade}
+
+\begin{document}
+\maketitle
+\section{Motivação}
+No estudo de grafos de visibilidade, em 2005, Kára, Pór e Wood\cite{visibilitygraph} conjecturaram o seguinte:
+\begin{bigline}
+Para inteiros $k, l\geq 2$ existe um $n$ tal que todo conjunto $P$ com pelo menos $n$ pontos contém $l$ pontos colineares ou $k$ pontos visíveis dois a dois (equivalentemente, o grafo de visibilidade de $P$ tem um $k$-clique).
+\end{bigline}
+Esse problema chamou bastante a atenção de pesquisadores na época\cite{pentagon, visblock, infinity} e ainda permanece em aberto, com não muitos resultados.
+
+Porém, essa curiosidade levou pesquisadores a estudar conjuntos de bloqueadores de visibilidades, o que gerou uma outra questão também tão interessante quanto:
+\begin{bloqueadores}
+Seja $P$ um conjunto de $n$ pontos no plano sem três pontos colineares. Dizemos que um conjunto $Q$ bloqueia $P$ se $P\cap Q=\emptyset$ e todo segmento com extremidades em $P$ contém um ponto em $Q$. $b(P)$ é o tamanho do menor conjunto que bloqueia $P$ e $b(n)$ é o mínimo de todos os $b(P)$s para todos os conjuntos $P$s de n elementos.
+\end{bloqueadores}
+Existem alguns resultados sobre a ordem de crescimento de $b(n)$, mas ainda há muita coisa a ser resolvida nessa área.
+
+\section{Objetivo}
+Nesse trabalho, eu pretendo fazer um estudo rigoroso sobre os resultados existentes nos problemas cidados a cima e possivelmente em alguns tópicos relacionados, em particular, provando os seguintes resultados:
+\begin{itemize}
+\item
+    Big Line Big Clique conjecture é verdadeira para $k=4$\cite{visibilitygraph}.
+\item
+    Também é para $k=5$\cite{pentagon}.
+\item
+    É falsa para conjuntos infinitos de pontos\cite{infinity}.
+\item
+    Existe $c$ tal que $b(n)\leq 2^{c\sqrt{logn}}$\cite{blockers}.
+\item
+    Para todo conjunto $P$ de $n$ pontos em posição estritamente convexa, $b(P)$ é $\Omega(nlogn)$\cite{blockers}.
+\item
+    $b(n)\geq(\frac{25}{8}-o(1))n$\cite{block}.
+\end{itemize}
+
+\bibliographystyle{plain}
+\bibliography{ref}{}
+
+\end{document}
