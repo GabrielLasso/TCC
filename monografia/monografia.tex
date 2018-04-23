@@ -4,13 +4,12 @@
 \usepackage[T1]{fontenc}
 \usepackage{amsthm}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
-\usepackage{titling}
-\renewcommand\maketitlehooka{\null\mbox{}\vfill}
-\renewcommand\maketitlehookd{\vfill\null}
 
 \title{\textbf{Big-Line-Big-Clique Conjecture e Bloqueadores de Visibilidade}}
 \author{Gabriel K. Lasso\\ Orientador: Carlos E. Ferreira}
 \date{}
+
+\newtheorem{conjecture}{Conjectura}
 
 \begin{document}
 \maketitle
@@ -18,10 +17,34 @@
 \chapter{Introdução}
 
 \section{Motivação}
+Aqui faremos um estudo de um problema de visibilidade que surgiu em 2005 e até o começo dessa década chamou a atenção de vários pesquisadores. Qual a quantidade máxima de pontos no plano de forma que não tenha conjuntos grandes de pontos colineares nem de pontos visíveis. A natureza desse problema lembra o problema de Ramsey, porém ele possui uma cara geométria e é extremamente difícil de lidar, tanto que não se sabe se existe essa quantidade máxima.
+
+Se dois pontos não são visíveis, é porque um terceiro bloqueia a visibilidade deles. Outro problema estudado aqui é sobre o tamanho mínimo do conjunto de bloqueadores para um conjunto de pontos.
+
+Todos esses conceitos serão definidos com mais formalidade mais pra frente. O primeiro problema é conhecido como \textbf{conjectura big-line-big-clique} e o segundo é uma questão natural sobre \textbf{bloqueadores de visibilidade}.
+
 
 \section{Estrutura do trabalho}
-
+No caítulo 2 vamos mostrar os resultados conhecidos sobre a conjectura big-line-big-clique, mostrar algumas dificuldades encontradas na tentativa de resolver esse problema e discutir alguns fatos sobre ele. No capítulo 3 vamos focar no problema dos bloqueadores de visibilidade, mostrando cotas superiores e inferiores conhecidas e discutindo algumas coisas em aberto que as pessoas acreditam que sejam verade.
 \chapter{Big-Line-Big-Clique conjecture}
+
+Seja $P$ um conjunto finito de pontos no plano e $x,y\in P$. Dizemos que $x$ e $y$ são visíveis em $P$ se $\overline{xy}\cap P =\{x,y\}$. $p_1, p_2, ..., p_n$ são visíveis se são visíveis dois a dois.
+
+O grafo de visibilidade de um conjunto $P$ de pontos no plano é o grafo construído da seguinte forma: o conjunto de vértices é $P$ e há uma aresta entre dois vértices $x$ e $y$ se $x$ e $y$ são visíveis. Denotamos esse grafo por $\mathcal V(P)$
+
+\begin{conjecture}
+    Dados dois inteiros $k,l\geq2$, existe um $n=n(k,l)$ tal que todo conjunto finito $P$ com pelo menos $n$ pontos no plano contém $k$ pontos visíveis (alternativamente, $\mathcal V(P)$ possui um $k$-clique) ou $l$ pontos colineares.
+\end{conjecture}
+
+Para nos habituarmos com o problema, vamos começar pelos casos mais básicos:
+
+\section{Casos triviais}
+Primeiramente, se $k=2$ ou $l=2$, com certeza todo conjunto com pelo menos dois pontos tem dois pontos colineares e dois pontos visíveis.
+
+Se $k=3$, ou se tem três pontos visíveis ou todos os pontos no conjunto são colineares, então $n(3,l)=max\{3,l\}$.
+
+Se $l=3$, ou todos os pontos são visíveis para todos os outros ou algum ponto não deixa outros dois se verem, se tendo três pontos colineares. $n(k,3) = max\{k,3\}$.
+
 
 \section{Caso $k=4$}
 \subsection{Grafos de visibilidade planares}
