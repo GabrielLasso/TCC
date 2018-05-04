@@ -5,14 +5,19 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 
 \title{\textbf{Big-Line-Big-Clique Conjecture e Bloqueadores de Visibilidade}}
 \author{Gabriel K. Lasso\\ Orientador: Carlos E. Ferreira}
 \date{}
 
-\newtheorem{conjecture}{Conjectura}
+\newtheorem{conjectura}{Conjectura}
 \newtheorem{teorema}{Teorema}
+\newtheorem{corolario}{Corolário}
 
 \begin{document}
 \maketitle
@@ -42,20 +47,20 @@ Se uma aresta $e={u,v}\in E(G)$, dizemos que $u$ e $v$ são \textbf{vizinhos} ou
 
 Um grafo \textbf{completo} é um grafo em que todos dois vértices distintos são adjacentes. Chamamos o grafo completo de ordem $n$ de $K_n$.
 
-Se $G$ é um grafo e  $S\subset V(G)$ é um conjunto de vértices, chamamos de \textbf{subgrafo} de $G$ induzido por $S$ o grafo $G[S]=(S,E_S)$, em que $E_S={{u,v}\in E(G)|u,v\in S}$. Nesse caso, dizemos que $G$ contém uma cópia de $G[S]$ ou simplesmente que $G$ contém $G[S]$, ou ainda que $G$ possiu $G[S]$.
+Se $G$ é um grafo e  $S\subset V(G)$ é um conjunto de vértices, chamamos de \textbf{subgrafo} de $G$ induzido por $S$ o grafo $G[S]=(S,E_S)$, em que $E_S=\{{u,v}\in E(G)|u,v\in S\}$. Nesse caso, dizemos que $G$ contém uma cópia de $G[S]$ ou simplesmente que $G$ contém $G[S]$, ou ainda que $G$ possiu $G[S]$.
 
 Um \textbf{k-clique} é um conjunto de vértices $C$ tal que $G[C]$ é um grafo completo de ordem k.
-
-Se $G$ é um grafo, uma \textbf{imersão de G no plano} ou um \textbf{desenho de G} é um conjunto de pontos no plano tal que existe uma bijeção $p$ que leva cada vértice $v$ do grafo a um ponto $p(v)$ da imersão, de modo que uma aresta ${u,v}$ passa a ser vista como um segmento com extremos $p(u)$ e $p(v)$. Dizemos que um grafo é \textbf{planar} se existir uma imersão no plano na qual as arestas não se cruzam. Muitas vezes confundimos o grafo com sua uma imersão sua, os tratando como o mesmo objeto.
 
 \section{Grafo de visibilidade}
 Na sessão anterior, definimos conceitos básicos de teoria dos grafos. Aqui vamos estudar um caso bem particular.
 
 Seja $P$ é um conjunto de pontos no plano tal que todo ponto de $P$ é isolado e $x,y\in P$. Dizemos que $x$ e $y$ são visíveis em $P$ se $\overline{xy}\cap P =\{x,y\}$. $p_1, p_2, ..., p_n$ são visíveis se são visíveis dois a dois.
 
-O grafo de visibilidade de um conjunto $P$ de pontos no plano é o grafo construído da seguinte forma: o conjunto de vértices é $P$ e há uma aresta entre dois vértices $x$ e $y$ se $x$ e $y$ são visíveis. Denotamos esse grafo por $\mathcal V(P)$ e se ${p,q}$ é uma aresta, nos referimos a ela como o segmento $\overline{pq}$ às vezes.
+O grafo de visibilidade de um conjunto $P$ de pontos no plano é o grafo construído da seguinte forma: o conjunto de vértices é $P$ e há uma aresta entre dois vértices $x$ e $y$ se $x$ e $y$ são visíveis. Denotamos esse grafo por $\mathcal V(P)$ e se ${p,q}$ é uma aresta, às vezes nos referimos a ela como o segmento aberto $\overline{pq}$.
 
-\begin{teorema}\cite{visibility}
+Dizemos que um grafo de visibilidade é planar se suas arestas não se interceptarem.
+
+\begin{teorema}\cite{visibility}\label{planork4}
     Todo grafo de visibilidade finito é planar ou contém uma cópia de $K_4$.
 \end{teorema}
 Prova:
@@ -66,10 +71,10 @@ Como $G$ não é planar, existe alguma aresta $\overline{ab}$ que intercepta com
 
 
 \chapter{Big-Line-Big-Clique conjecture}
-
-\begin{conjecture}
+A conjectura seguinte foi proposta por \cite{visibilitygraph} em 2005, e ainda não se sabe se ela vale para valores a partir de  $k=6$ e $l=4$.
+\begin{conjectura}\label{conj1}
     Dados dois inteiros $k,l\geq2$, existe um $n=n(k,l)$ tal que todo conjunto finito $P$ com pelo menos $n$ pontos no plano contém $k$ pontos visíveis (alternativamente, $\mathcal V(P)$ possui um $k$-clique) ou $l$ pontos colineares.
-\end{conjecture}
+\end{conjectura}
 
 Para nos habituarmos com o problema, vamos começar pelos casos mais básicos:
 
@@ -82,9 +87,160 @@ Se $l=3$, ou todos os pontos são visíveis para todos os outros ou algum ponto 
 
 
 \section{Caso $k=4$}
-\subsection{Grafos de visibilidade planares}
-Provar teorema 1 de \cite{planar}
-\cite{visibilitygraph}
+Vamos mostrar que os conjuntos que não possuem quatro pontos visíveis possuem muitos pontos colineares. Isto é, para todo $l$ existe um $n$ tal que todo conjunto $P$ com pelo menos $n$ pontos que não possui quatro pontos visívels possui pelo menos $l$ pontos colineares.
+
+Pelo teorema \ref{planork4}, um conjunto que não possui quatro pontos visíveis possui grafo de visibilidade planar. O teorema a seguir caracteriza os grafos de visibilidade planares:
+
+\begin{figure}
+    \begin{tikzpicture}
+        \node(A) {$(a)$};
+        \node[draw, shape=circle] (A1) [right = 0.3cm of A] {};
+        \node[draw, shape=circle] (A2) [right = 0.6cm of A1] {};
+        \node[draw, shape=circle] (A3) [right = 0.6cm of A2] {};
+        \node[draw, shape=circle] (A4) [right = 0.6cm of A3] {};
+        \node[draw, shape=circle] (A5) [right = 0.6cm of A4] {};
+        \draw (A1)--(A2);
+        \draw (A2)--(A3);
+        \draw (A3)--(A4);
+        \draw (A4)--(A5);
+
+        \node(B) [below = 1.2cm of A] {$(b)$};
+        \node[draw, shape=circle] (B1) [right = 0.3cm of B] {};
+        \node[draw, shape=circle] (B2) [right = 0.6cm of B1] {};
+        \node[draw, shape=circle] (B3) [right = 0.6cm of B2] {};
+        \node[draw, shape=circle] (B4) [right = 0.6cm of B3] {};
+        \node[draw, shape=circle] (B5) [right = 0.6cm of B4] {};
+        \node[draw, shape=circle] (B6) [above = 0.6cm of B3] {};
+        \draw (B1)--(B2);
+        \draw (B2)--(B3);
+        \draw (B3)--(B4);
+        \draw (B4)--(B5);
+        \draw (B1)--(B6);
+        \draw (B2)--(B6);
+        \draw (B3)--(B6);
+        \draw (B4)--(B6);
+        \draw (B5)--(B6);
+
+        \node(C) [below = 1.2cm of B] {$(c)$};
+        \node[draw, shape=circle] (C1) [right = 0.3cm of C] {};
+        \node[draw, shape=circle] (C2) [right = 0.6cm of C1] {};
+        \node[draw, shape=circle] (C3) [right = 0.6cm of C2] {};
+        \node[draw, shape=circle] (C4) [right = 0.6cm of C3] {};
+        \node[draw, shape=circle] (C5) [right = 0.6cm of C4] {};
+        \node[draw, shape=circle] (C6) [above = 0.6cm of C3] {};
+        \node[draw, shape=circle] (C7) [below = 0.6cm of C3] {};
+        \draw (C1)--(C2);
+        \draw (C2)--(C3);
+        \draw (C3)--(C4);
+        \draw (C4)--(C5);
+        \draw (C1)--(C6);
+        \draw (C2)--(C6);
+        \draw (C3)--(C6);
+        \draw (C4)--(C6);
+        \draw (C5)--(C6);
+        \draw (C1)--(C7);
+        \draw (C2)--(C7);
+        \draw (C3)--(C7);
+        \draw (C4)--(C7);
+        \draw (C5)--(C7);
+
+        \node(D) [right = 5.4cm of A] {$(d)$};
+        \node (D') [right = 0.3cm of D] {};
+        \node[draw, shape=circle] (D1) [right = 0.3cm of D'] {};
+        \node[draw, shape=circle] (D2) [right = 0.6cm of D1] {};
+        \node[draw, shape=circle] (D3) [right = 0.6cm of D2] {};
+        \node[draw, shape=circle] (D4) [right = 0.6cm of D3] {};
+        \node[draw, shape=circle] (D5) [right = 0.6cm of D4] {};
+        \node[draw, shape=circle] (D6) [above = 0.6cm of D'] {};
+        \node[draw, shape=circle] (D7) [below = 0.6cm of D'] {};
+        \draw (D1)--(D2);
+        \draw (D2)--(D3);
+        \draw (D3)--(D4);
+        \draw (D4)--(D5);
+        \draw (D1)--(D6);
+        \draw (D2)--(D6);
+        \draw (D3)--(D6);
+        \draw (D4)--(D6);
+        \draw (D5)--(D6);
+        \draw (D1)--(D7);
+        \draw (D2)--(D7);
+        \draw (D3)--(D7);
+        \draw (D4)--(D7);
+        \draw (D5)--(D7);
+        \draw (D6)--(D7);
+
+        \node(E) [below =2.4cm of D] {$(e)$};
+        \node[draw, shape=circle] (E1) [below right = 1cm and 0.3cm of E] {};
+        \node[draw, shape=circle] (E2) [right = 3cm of E1] {};
+        \node[draw, shape=circle] (E3) [above right = 2.8cm and 1.5cm of E1] {};
+        \node[draw, shape=circle] (E4) [below left = 1.1cm and 0cm of E3] {};
+        \node[draw, shape=circle] (E5) [below left = 0.9cm and 0cm of E4] {};
+        \node[draw, shape=circle] (E6) [below right = 0.5cm and 0.55cm of E4] {};
+        \draw (E1)--(E2);
+        \draw (E2)--(E3);
+        \draw (E3)--(E1);
+        \draw (E1)--(E4);
+        \draw (E1)--(E5);
+        \draw (E2)--(E5);
+        \draw (E2)--(E6);
+        \draw (E3)--(E6);
+        \draw (E3)--(E4);
+        \draw (E4)--(E5);
+        \draw (E5)--(E6);
+        \draw (E6)--(E4);
+    \end{tikzpicture}
+    \caption{Tipos de grafos de visibilidade planares}
+    \label{fig:visibilidadeplanar}
+\end{figure}
+
+\begin{teorema}\cite{planar}\label{visibilidadeplanar}
+    Seja $P$ um conjunto finito de pontos no plano. Então $\mathcal V(P)$ é planar se e somente se satisfaz uma das condições:
+    \begin{enumerate}[label=(\alph*)]
+        \item
+            Todos os pontos de $P$ são colineares.
+        \item
+            Todos os pontos de $P$ são colineares exceto um.
+        \item
+            Todos os pontos de $P$ são colineares exceto dois pontos não visíveis.
+        \item
+            Todos os pontos de $P$ são colieares exceto dois pontos $p$ e $q$ tais que o segmento $\overline{pq}$ não intercepta o menor segmento que contém $P\setminus\{p,q\}$
+        \item
+            $\mathcal V(P)$ é o grafo $(e)$ desenhado na figura \ref{fig:visibilidadeplanar}
+    \end{enumerate}
+\end{teorema}
+Prova:
+Como pode ser visto na figura \ref{fig:visibilidadeplanar} e pode ser facilmente demonstrado, se um grafo de visibilidade satisfaz alguma das condições $(a)-(e)$, ele é planar. Para mostrar a outra direção, seja $P$ um conjunto finito de pontos no plano tal que $\mathcal V(P)$ é planar.
+
+Se $P$ contém no máximo dois pontos, $P$ satisfaz $(a)$. Então vamos supor que $|P|\geq 3$. Seja $L$ um maior conjunto de pontos colineares em $P$ e $\hat L$ a reta que contém $L$. $|L|\geq 2$. Se $|L|=2$, então $L$ satisfaz $(a)$, $(b)$ ou $(e)$. Vamos supor então que $|L|\geq3$.
+
+A reta $\hat L$ divide o plano em dois semiplanos. Sejam $S$ e $T$ os conjuntos de vértices em cada um desses semiplanos tal que $|S|\geq|T|$. Se $|S|$ for no máximo 1, então $P$ satisfaz algum de $(a)-(d)$. Então supor que $|S|\geq2$. Seja $v$ um ponto de $S$ mais próximo de $\hat L$ e seja $w$ um ponto de $S\setminus\{v\}$ mais próximo de $\hat L$. Note que a reta que contém $v$ e $w$ não é paralela a $\hat L$, pois, se fosse, para todos $x,y\in L$, as arestas $\overline{vx}$ e $\overline{wy}$ ou as arestas $\overline{vy}$ e $\overline{wx}$ se interceptariam e, como o grafo é planar, existiria um vértice nessa interseção que seria mais próximo de $\hat L$ do que $v$, contradizendo a escolha de $v$. Então a reta que contém $v$ e $w$ intercepta $\hat L$ em um ponto, digamos, $p$.
+
+Vamos mostrar que em $\hat L$ se tem no máximo um vértice de cada lado de $p$. Para isso, suponha que existam dois vértices $x,y\in L$ tais que $x$ esteja entre $y$ e $p$. Então as arestas $\overline{vy}$ e $\overline{wx}$ se interceptam num ponto mais próximo de $\hat L$ do que $v$ e, como o grafo é planar, deve existir um vértice nessa interseção, contradizendo a escolha de $v$. Mas como $|L|\geq3$, $L$ tem que possuir exatamente $3$ pontos: $p$ e um ponto de cada lado de $p$, que vamos chamar de $x$ e $y$.
+
+Agora vamos mostrar que $S=\{v,w\}$. Suponha que $S$ contém um terceiro ponto $u$. $u$ não está na mesma reta que $p$, $v$ e $w$ pois $L$ tem tamanho máximo. Pela escolha de $v$ e $w$, $u$ está mais longe de $\hat L$ do que $w$. Então $\overline{uv}$ intercepta $\overline{wx}$ ou $\overline{wy}$ num ponto mais próximo de $\hat L$ do que $w$, contradizendo a escolha de $w$. Logo $|S|=2$. Então $|T|\leq2$.
+
+Se $T=\emptyset$, então $P$ satisfaz $(c)$. Suponha que $T\neq\emptyset$. Seja $u$ um ponto de $T$ e $q$ a interseção da reta que contém $u$ e $v$ e da reta $\hat L$. Suponha que $q$ não seja um vértice de $L$. Se $q$ está entre $x$ e $y$, então as arestas $\overline{vu}$ e $\overline{px}$ ou $\overline{py}$ se interceptam em $q$, e como o grafo é planar, $q$ tem que ser um vértice do grafo, o que é uma contradição. Similarmente, se $q$ não está entre $x$ e $y$, as arestas $\overline{uv}$ e $\overline{wx}$ ou $\overline{wy}$ se interceptam no ponto $q$, gerando uma contradição. Então $u$ intercepta $\hat L$ num vértice. Esse vértice não pode ser $p$, pois se fosse isso contradiria a escolha de $L$.
+
+Suponha que existam dois pontos $u_1$ e $u_2$ em $T$. Se $u_1$ está na mesma reta que $v$ e $x$ e $u_2$ está na mesma reta que $v$ e $y$. As arestas $\overline{u_1y}$ e $\overline{u_2x}$ se interceptam em um ponto de $T$ que não está na mesma reta que $v$ e $x$ nem que $v$ e $y$, o que é uma contradição. Se $u_1$ e $u_2$ estão na mesma reta que $v$ e $x$, suponha sem perda de generalidade que $u_1$ está entre $x$ e $u_2$, então as arestas $\overline{u_1y}$ e $\overline{u_2x}$ se interceptam em um ponto de $T$ que não está na mesma reta que $v$ e $x$ nem que $v$ e $y$, o que é uma contradição. Do mesmo jeito, se $u_1$ e $u_2$ estão na mesma reta que $v$ e $y$ também temos uma contradição. Portanto $|T|=1$. Sem perda de generalidade, digamos que $u$ é colinear com $v$ e $x$. Assim $\{p,u,v,x,y,w\}$ forma o grafo $(e)$ da figura \ref{fig:visibilidadeplanar}
+\qed
+\begin{corolario}
+    Seja $P$ um conjunto finito de pontos no plano. As seguintes afirmações são equivalentes:
+    \begin{itemize}
+        \item
+            $P$ satisfaz $(a)$, $(b)$, $(c)$ ou $(e)$ do teorema \ref{visibilidadeplanar}.
+        \item
+            $\mathcal V(P)$ não tem $K_4$.
+    \end{itemize}
+\end{corolario}
+Prova:
+Se $P$ satisfaz $(a)$, $(b)$, $(c)$ ou $(e)$ do teorema \ref{visibilidadeplanar}, é fácil ver que $\mathcal V(P)$ não tem $K_4$.
+
+Se $\mathcal V(P)$ não tem $K_4$, pelo teorema \ref{planork4}, $\mathcal V(P)$ é planar. Logo, pelo teorema \ref{visibilidadeplanar}, $P$ satisfaz $(a)$, $(b)$, $(c)$, $(d)$ ou $(e)$. Mas como $(d)$ possiu $K_4$, $P$ satisfaz $(a)$, $(b)$, $(c)$ ou $(e)$. \qed
+
+\begin{corolario}
+    A conjectura \ref{conj1} é verdadeira para $k=4$ com $n(4,l)=max\{7,l+2\}.$
+\end{corolario}
+
 \section{Caso $k=5$}
 \subsection{Erdös-Szekeres Theorem}
 Provar teorema de Erdös-Szekers sobre polígonos convexos (Happy ending problem).
