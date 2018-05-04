@@ -3,6 +3,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 
 \title{\textbf{Big-Line-Big-Clique Conjecture e Bloqueadores de Visibilidade}}
@@ -10,6 +12,7 @@
 \date{}
 
 \newtheorem{conjecture}{Conjectura}
+\newtheorem{teorema}{Teorema}
 
 \begin{document}
 \maketitle
@@ -17,7 +20,7 @@
 \chapter{Introdução}
 
 \section{Motivação}
-Aqui faremos um estudo de um problema de visibilidade que surgiu em 2005 e até o começo dessa década chamou a atenção de vários pesquisadores. Qual a quantidade máxima de pontos no plano de forma que não tenha conjuntos grandes de pontos colineares nem de pontos visíveis. A natureza desse problema lembra o problema de Ramsey, porém ele possui uma cara geométria e é extremamente difícil de lidar, tanto que não se sabe se existe essa quantidade máxima.
+Aqui faremos um estudo de um problema de visibilidade que surgiu em 2005 e até o começo dessa década chamou a atenção de vários pesquisadores. Qual a quantidade máxima de pontos no plano de forma que não tenha conjuntos grandes de pontos colineares nem de pontos visíveis? A natureza desse problema lembra o problema de Ramsey, porém ele possui uma cara geométria e é extremamente difícil de lidar, tanto que não se sabe se existe essa quantidade máxima.
 
 Se dois pontos não são visíveis, é porque um terceiro bloqueia a visibilidade deles. Outro problema estudado aqui é sobre o tamanho mínimo do conjunto de bloqueadores para um conjunto de pontos.
 
@@ -25,12 +28,44 @@ Todos esses conceitos serão definidos com mais formalidade mais pra frente. O p
 
 
 \section{Estrutura do trabalho}
-No caítulo 2 vamos mostrar os resultados conhecidos sobre a conjectura big-line-big-clique, mostrar algumas dificuldades encontradas na tentativa de resolver esse problema e discutir alguns fatos sobre ele. No capítulo 3 vamos focar no problema dos bloqueadores de visibilidade, mostrando cotas superiores e inferiores conhecidas e discutindo algumas coisas em aberto que as pessoas acreditam que sejam verade.
+No caítulo 2 vamos definir alguns conceitos que serão base para os demais, assim como demonstrar algumas propriedades chaves desses conceitos. No capítulo 3 vamos mostrar os resultados conhecidos sobre a conjectura big-line-big-clique, mostrar algumas dificuldades encontradas na tentativa de resolver esse problema e discutir alguns fatos sobre ele. No capítulo 4 vamos focar no problema dos bloqueadores de visibilidade, mostrando cotas superiores e inferiores conhecidas e discutindo algumas coisas em aberto que as pessoas acreditam que sejam verade.
+
+\chapter{Noções preliminares}
+\section{Grafos}
+Um grafo é um par $G=(V,E)$ em que $V$ é um conjunto enumerável (geralmente finito) e $E$ é um conjunto de pares não ordenados de elementos de $V$. Os elementos de $V$ são chamados \textbf{vértices}, e os elementos de $E$ são chamados \textbf{arestas}.
+
+Se $G$ é um grafo, chamamos de $V(G)$ seu conjunto de vértices e de $E(G)$ seu conjunto de arestas.
+
+Chamamos \textbf{ordem} de um grafo a cardinalidade de seu conjunto de vértices.
+
+Se uma aresta $e={u,v}\in E(G)$, dizemos que $u$ e $v$ são \textbf{vizinhos} ou \textbf{adjacentes}.
+
+Um grafo \textbf{completo} é um grafo em que todos dois vértices distintos são adjacentes. Chamamos o grafo completo de ordem $n$ de $K_n$.
+
+Se $G$ é um grafo e  $S\subset V(G)$ é um conjunto de vértices, chamamos de \textbf{subgrafo} de $G$ induzido por $S$ o grafo $G[S]=(S,E_S)$, em que $E_S={{u,v}\in E(G)|u,v\in S}$. Nesse caso, dizemos que $G$ contém uma cópia de $G[S]$ ou simplesmente que $G$ contém $G[S]$, ou ainda que $G$ possiu $G[S]$.
+
+Um \textbf{k-clique} é um conjunto de vértices $C$ tal que $G[C]$ é um grafo completo de ordem k.
+
+Se $G$ é um grafo, uma \textbf{imersão de G no plano} ou um \textbf{desenho de G} é um conjunto de pontos no plano tal que existe uma bijeção $p$ que leva cada vértice $v$ do grafo a um ponto $p(v)$ da imersão, de modo que uma aresta ${u,v}$ passa a ser vista como um segmento com extremos $p(u)$ e $p(v)$. Dizemos que um grafo é \textbf{planar} se existir uma imersão no plano na qual as arestas não se cruzam. Muitas vezes confundimos o grafo com sua uma imersão sua, os tratando como o mesmo objeto.
+
+\section{Grafo de visibilidade}
+Na sessão anterior, definimos conceitos básicos de teoria dos grafos. Aqui vamos estudar um caso bem particular.
+
+Seja $P$ é um conjunto de pontos no plano tal que todo ponto de $P$ é isolado e $x,y\in P$. Dizemos que $x$ e $y$ são visíveis em $P$ se $\overline{xy}\cap P =\{x,y\}$. $p_1, p_2, ..., p_n$ são visíveis se são visíveis dois a dois.
+
+O grafo de visibilidade de um conjunto $P$ de pontos no plano é o grafo construído da seguinte forma: o conjunto de vértices é $P$ e há uma aresta entre dois vértices $x$ e $y$ se $x$ e $y$ são visíveis. Denotamos esse grafo por $\mathcal V(P)$ e se ${p,q}$ é uma aresta, nos referimos a ela como o segmento $\overline{pq}$ às vezes.
+
+\begin{teorema}\cite{visibility}
+    Todo grafo de visibilidade finito é planar ou contém uma cópia de $K_4$.
+\end{teorema}
+Prova:
+Seja $G=\mathcal V(P)$ um grafo de visibilidade finito. Suponha que $G$ não seja planar. Vamos mostrar que $G$ contém $K_4$.
+
+Como $G$ não é planar, existe alguma aresta $\overline{ab}$ que intercepta com outras (pelo menos uma outra). A reta $\overleftrightarrow{ab}$ separa o plano em dois semiplanos $D$ e $E$. Seja $p$ o ponto de $D$ mais próximo do segmento $\overline{ab}$ e $q$ o ponto de $E$ mais próximo do segmento $\overline{ab}$. Pela escolha de $p$ e $q$, os pontos $a$, $b$, $p$ e $q$ são visíveis, logo $G[\{a,b,p,q\}]$ é um $K_4$.\qed
+
+
+
 \chapter{Big-Line-Big-Clique conjecture}
-
-Seja $P$ um conjunto finito de pontos no plano e $x,y\in P$. Dizemos que $x$ e $y$ são visíveis em $P$ se $\overline{xy}\cap P =\{x,y\}$. $p_1, p_2, ..., p_n$ são visíveis se são visíveis dois a dois.
-
-O grafo de visibilidade de um conjunto $P$ de pontos no plano é o grafo construído da seguinte forma: o conjunto de vértices é $P$ e há uma aresta entre dois vértices $x$ e $y$ se $x$ e $y$ são visíveis. Denotamos esse grafo por $\mathcal V(P)$
 
 \begin{conjecture}
     Dados dois inteiros $k,l\geq2$, existe um $n=n(k,l)$ tal que todo conjunto finito $P$ com pelo menos $n$ pontos no plano contém $k$ pontos visíveis (alternativamente, $\mathcal V(P)$ possui um $k$-clique) ou $l$ pontos colineares.
