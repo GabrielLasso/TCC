@@ -16,8 +16,8 @@
 \date{}
 
 \newtheorem{conjectura}{Conjectura}
-\newtheorem{teorema}{Teorema}
-\newtheorem{corolario}{Corolário}
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{corolario}{Corolário}[teorema]
 
 \begin{document}
 \maketitle
@@ -63,11 +63,11 @@ Dizemos que um grafo de visibilidade é planar se suas arestas não se intercept
 \begin{teorema}\cite{visibility}\label{planork4}
     Todo grafo de visibilidade finito é planar ou contém uma cópia de $K_4$.
 \end{teorema}
-Prova:
+\begin{proof}
 Seja $G=\mathcal V(P)$ um grafo de visibilidade finito. Suponha que $G$ não seja planar. Vamos mostrar que $G$ contém $K_4$.
 
-Como $G$ não é planar, existe alguma aresta $\overline{ab}$ que intercepta com outras (pelo menos uma outra). A reta $\overleftrightarrow{ab}$ separa o plano em dois semiplanos $D$ e $E$. Seja $p$ o ponto de $D$ mais próximo do segmento $\overline{ab}$ e $q$ o ponto de $E$ mais próximo do segmento $\overline{ab}$. Pela escolha de $p$ e $q$, os pontos $a$, $b$, $p$ e $q$ são visíveis, logo $G[\{a,b,p,q\}]$ é um $K_4$.\qed
-
+Como $G$ não é planar, existe alguma aresta $\overline{ab}$ que intercepta com outras (pelo menos uma outra). A reta $\overleftrightarrow{ab}$ separa o plano em dois semiplanos $D$ e $E$. Seja $p$ o ponto de $D$ mais próximo do segmento $\overline{ab}$ e $q$ o ponto de $E$ mais próximo do segmento $\overline{ab}$. Pela escolha de $p$ e $q$, os pontos $a$, $b$, $p$ e $q$ são visíveis, logo $G[\{a,b,p,q\}]$ é um $K_4$.
+\end{proof}
 
 
 \chapter{Big-Line-Big-Clique conjecture}
@@ -208,7 +208,7 @@ Pelo teorema \ref{planork4}, um conjunto que não possui quatro pontos visíveis
             $\mathcal V(P)$ é o grafo $(e)$ desenhado na figura \ref{fig:visibilidadeplanar}
     \end{enumerate}
 \end{teorema}
-Prova:
+\begin{proof}
 Como pode ser visto na figura \ref{fig:visibilidadeplanar} e pode ser facilmente demonstrado, se um grafo de visibilidade satisfaz alguma das condições $(a)-(e)$, ele é planar. Para mostrar a outra direção, seja $P$ um conjunto finito de pontos no plano tal que $\mathcal V(P)$ é planar.
 
 Se $P$ contém no máximo dois pontos, $P$ satisfaz $(a)$. Então vamos supor que $|P|\geq 3$. Seja $L$ um maior conjunto de pontos colineares em $P$ e $\hat L$ a reta que contém $L$. $|L|\geq 2$. Se $|L|=2$, então $L$ satisfaz $(a)$, $(b)$ ou $(e)$. Vamos supor então que $|L|\geq3$.
@@ -222,7 +222,7 @@ Agora vamos mostrar que $S=\{v,w\}$. Suponha que $S$ contém um terceiro ponto $
 Se $T=\emptyset$, então $P$ satisfaz $(c)$. Suponha que $T\neq\emptyset$. Seja $u$ um ponto de $T$ e $q$ a interseção da reta que contém $u$ e $v$ e da reta $\hat L$. Suponha que $q$ não seja um vértice de $L$. Se $q$ está entre $x$ e $y$, então as arestas $\overline{vu}$ e $\overline{px}$ ou $\overline{py}$ se interceptam em $q$, e como o grafo é planar, $q$ tem que ser um vértice do grafo, o que é uma contradição. Similarmente, se $q$ não está entre $x$ e $y$, as arestas $\overline{uv}$ e $\overline{wx}$ ou $\overline{wy}$ se interceptam no ponto $q$, gerando uma contradição. Então $u$ intercepta $\hat L$ num vértice. Esse vértice não pode ser $p$, pois se fosse isso contradiria a escolha de $L$.
 
 Suponha que existam dois pontos $u_1$ e $u_2$ em $T$. Se $u_1$ está na mesma reta que $v$ e $x$ e $u_2$ está na mesma reta que $v$ e $y$. As arestas $\overline{u_1y}$ e $\overline{u_2x}$ se interceptam em um ponto de $T$ que não está na mesma reta que $v$ e $x$ nem que $v$ e $y$, o que é uma contradição. Se $u_1$ e $u_2$ estão na mesma reta que $v$ e $x$, suponha sem perda de generalidade que $u_1$ está entre $x$ e $u_2$, então as arestas $\overline{u_1y}$ e $\overline{u_2x}$ se interceptam em um ponto de $T$ que não está na mesma reta que $v$ e $x$ nem que $v$ e $y$, o que é uma contradição. Do mesmo jeito, se $u_1$ e $u_2$ estão na mesma reta que $v$ e $y$ também temos uma contradição. Portanto $|T|=1$. Sem perda de generalidade, digamos que $u$ é colinear com $v$ e $x$. Assim $\{p,u,v,x,y,w\}$ forma o grafo $(e)$ da figura \ref{fig:visibilidadeplanar}
-\qed
+\end{proof}
 \begin{corolario}
     Seja $P$ um conjunto finito de pontos no plano. As seguintes afirmações são equivalentes:
     \begin{itemize}
@@ -232,13 +232,14 @@ Suponha que existam dois pontos $u_1$ e $u_2$ em $T$. Se $u_1$ está na mesma re
             $\mathcal V(P)$ não tem $K_4$.
     \end{itemize}
 \end{corolario}
-Prova:
+\begin{proof}
 Se $P$ satisfaz $(a)$, $(b)$, $(c)$ ou $(e)$ do teorema \ref{visibilidadeplanar}, é fácil ver que $\mathcal V(P)$ não tem $K_4$.
 
-Se $\mathcal V(P)$ não tem $K_4$, pelo teorema \ref{planork4}, $\mathcal V(P)$ é planar. Logo, pelo teorema \ref{visibilidadeplanar}, $P$ satisfaz $(a)$, $(b)$, $(c)$, $(d)$ ou $(e)$. Mas como $(d)$ possiu $K_4$, $P$ satisfaz $(a)$, $(b)$, $(c)$ ou $(e)$. \qed
+Se $\mathcal V(P)$ não tem $K_4$, pelo teorema \ref{planork4}, $\mathcal V(P)$ é planar. Logo, pelo teorema \ref{visibilidadeplanar}, $P$ satisfaz $(a)$, $(b)$, $(c)$, $(d)$ ou $(e)$. Mas como $(d)$ possiu $K_4$, $P$ satisfaz $(a)$, $(b)$, $(c)$ ou $(e)$.
+\end{proof}
 
 \begin{corolario}
-    A conjectura \ref{conj1} é verdadeira para $k=4$ com $n(4,l)=max\{7,l+2\}.$
+    A conjectura \ref{conj1} é verdadeira para $k=4$ com $n(4,l)=max\{7,l+2\}$ se $l>3$.
 \end{corolario}
 
 \section{Caso $k=5$}
