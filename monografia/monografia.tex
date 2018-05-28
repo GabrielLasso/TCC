@@ -64,17 +64,38 @@ Dizemos que um grafo de visibilidade é planar se suas arestas não se intercept
     Todo grafo de visibilidade finito é planar ou contém uma cópia de $K_4$.
 \end{teorema}
 \begin{proof}
-Seja $G=\mathcal V(P)$ um grafo de visibilidade finito. Suponha que $G$ não seja planar. Vamos mostrar que $G$ contém $K_4$.
+    Seja $G=\mathcal V(P)$ um grafo de visibilidade finito. Suponha que $G$ não seja planar. Vamos mostrar que $G$ contém $K_4$.
 
-Como $G$ não é planar, existe alguma aresta $\overline{ab}$ que intercepta com outras (pelo menos uma outra). A reta $\overleftrightarrow{ab}$ separa o plano em dois semiplanos $D$ e $E$. Seja $p$ o ponto de $D$ mais próximo do segmento $\overline{ab}$ e $q$ o ponto de $E$ mais próximo do segmento $\overline{ab}$. Pela escolha de $p$ e $q$, os pontos $a$, $b$, $p$ e $q$ são visíveis, logo $G[\{a,b,p,q\}]$ é um $K_4$.
+    Como $G$ não é planar, existe alguma aresta $\overline{ab}$ que intercepta com outras (pelo menos uma outra). A reta $\overleftrightarrow{ab}$ separa o plano em dois semiplanos $D$ e $E$. Seja $p$ o ponto de $D$ mais próximo do segmento $\overline{ab}$ e $q$ o ponto de $E$ mais próximo do segmento $\overline{ab}$. Pela escolha de $p$ e $q$, os pontos $a$, $b$, $p$ e $q$ são visíveis, logo $G[\{a,b,p,q\}]$ é um $K_4$.
 \end{proof}
 
+\section{Geometria combinatória}
+Vamos dar algumas definições a respeito de conjuntos de pontos no plano. Seja $P$ um conjunto finito de pontos no plano e $conv(P)$ o casco convexo de $P$. Dizemos que $P$ está em \textbf{posição geral} se não existirem três pontos colineares em $P$. 
+
+Dizemos que $P$ está em \textbf{posição convexa} se todo ponto de $P$ estiver na fronteira de $conv(P)$.
+
+Um ponto $v\in P$ é uma \textbf{ponta} de $P$ se $conv(P)\neq conv(P\backslash v)$.
+
+Se todos os pontos de $P$ forem pontas, dizemos que $P$ está em \textbf{posição estritamente convexa}.
+
+Um \textbf{$k$-ágono} (respectivamente um \textbf{$k$-ágono estritamente convexo}) é o casco convexo de um conjunto de $k$ pontos (respectivamente em posição estritamente convexa).
+
+Se $X$ for um subconjunto de $P$ de $k$ pontos em posição estritamente convexa tal que $conv(X)\cap P=X$, então  $conv(X)$ é um \textbf{$k$-buraco} ou um \textbf{$k$-ágono vazio estritamente convexo} ou simplesmente um \textbf{$k$-ágono vazio}.
+
+Chamamos $3$-ágonos de triângulos, $4$-ágonos de quadriláteros, $5$-ágonos de pentágonos, etc.
+
+\subsection{Teorema de Erdös-Szekeres}
+Provar teorema de Erdös-Szekers sobre polígonos convexos (Happy ending problem).
+
+\subsection{Teorema de Sylvester-Gallai}
+Todo contunto finito de pontos tem todos os pontos colineares ou existe uma reta que passa por exatamente dois desses pontos.
 
 \chapter{Big-Line-Big-Clique conjecture}
 A conjectura seguinte foi proposta por \cite{visibilitygraph} em 2005, e ainda não se sabe se ela vale para valores a partir de  $k=6$ e $l=4$.
 \begin{conjectura}\label{conj1}
     Dados dois inteiros $k,l\geq2$, existe um $n=n(k,l)$ tal que todo conjunto finito $P$ com pelo menos $n$ pontos no plano contém $k$ pontos visíveis (alternativamente, $\mathcal V(P)$ possui um $k$-clique) ou $l$ pontos colineares.
 \end{conjectura}
+
 
 Para nos habituarmos com o problema, vamos começar pelos casos mais básicos:
 
@@ -209,19 +230,19 @@ Pelo teorema \ref{planork4}, um conjunto que não possui quatro pontos visíveis
     \end{enumerate}
 \end{teorema}
 \begin{proof}
-Como pode ser visto na figura \ref{fig:visibilidadeplanar} e pode ser facilmente demonstrado, se um grafo de visibilidade satisfaz alguma das condições $(a)-(e)$, ele é planar. Para mostrar a outra direção, seja $P$ um conjunto finito de pontos no plano tal que $\mathcal V(P)$ é planar.
+    Como pode ser visto na figura \ref{fig:visibilidadeplanar} e pode ser facilmente demonstrado, se um grafo de visibilidade satisfaz alguma das condições $(a)-(e)$, ele é planar. Para mostrar a outra direção, seja $P$ um conjunto finito de pontos no plano tal que $\mathcal V(P)$ é planar.
 
-Se $P$ contém no máximo dois pontos, $P$ satisfaz $(a)$. Então vamos supor que $|P|\geq 3$. Seja $L$ um maior conjunto de pontos colineares em $P$ e $\hat L$ a reta que contém $L$. $|L|\geq 2$. Se $|L|=2$, então $L$ satisfaz $(a)$, $(b)$ ou $(e)$. Vamos supor então que $|L|\geq3$.
+    Se $P$ contém no máximo dois pontos, $P$ satisfaz $(a)$. Então vamos supor que $|P|\geq 3$. Seja $L$ um maior conjunto de pontos colineares em $P$ e $\hat L$ a reta que contém $L$. $|L|\geq 2$. Se $|L|=2$, então $L$ satisfaz $(a)$, $(b)$ ou $(e)$. Vamos supor então que $|L|\geq3$.
 
-A reta $\hat L$ divide o plano em dois semiplanos. Sejam $S$ e $T$ os conjuntos de vértices em cada um desses semiplanos tal que $|S|\geq|T|$. Se $|S|$ for no máximo 1, então $P$ satisfaz algum de $(a)-(d)$. Então supor que $|S|\geq2$. Seja $v$ um ponto de $S$ mais próximo de $\hat L$ e seja $w$ um ponto de $S\setminus\{v\}$ mais próximo de $\hat L$. Note que a reta que contém $v$ e $w$ não é paralela a $\hat L$, pois, se fosse, para todos $x,y\in L$, as arestas $\overline{vx}$ e $\overline{wy}$ ou as arestas $\overline{vy}$ e $\overline{wx}$ se interceptariam e, como o grafo é planar, existiria um vértice nessa interseção que seria mais próximo de $\hat L$ do que $v$, contradizendo a escolha de $v$. Então a reta que contém $v$ e $w$ intercepta $\hat L$ em um ponto, digamos, $p$.
+    A reta $\hat L$ divide o plano em dois semiplanos. Sejam $S$ e $T$ os conjuntos de vértices em cada um desses semiplanos tal que $|S|\geq|T|$. Se $|S|$ for no máximo 1, então $P$ satisfaz algum de $(a)-(d)$. Então supor que $|S|\geq2$. Seja $v$ um ponto de $S$ mais próximo de $\hat L$ e seja $w$ um ponto de $S\setminus\{v\}$ mais próximo de $\hat L$. Note que a reta que contém $v$ e $w$ não é paralela a $\hat L$, pois, se fosse, para todos $x,y\in L$, as arestas $\overline{vx}$ e $\overline{wy}$ ou as arestas $\overline{vy}$ e $\overline{wx}$ se interceptariam e, como o grafo é planar, existiria um vértice nessa interseção que seria mais próximo de $\hat L$ do que $v$, contradizendo a escolha de $v$. Então a reta que contém $v$ e $w$ intercepta $\hat L$ em um ponto, digamos, $p$.
 
-Vamos mostrar que em $\hat L$ se tem no máximo um vértice de cada lado de $p$. Para isso, suponha que existam dois vértices $x,y\in L$ tais que $x$ esteja entre $y$ e $p$. Então as arestas $\overline{vy}$ e $\overline{wx}$ se interceptam num ponto mais próximo de $\hat L$ do que $v$ e, como o grafo é planar, deve existir um vértice nessa interseção, contradizendo a escolha de $v$. Mas como $|L|\geq3$, $L$ tem que possuir exatamente $3$ pontos: $p$ e um ponto de cada lado de $p$, que vamos chamar de $x$ e $y$.
+    Vamos mostrar que em $\hat L$ se tem no máximo um vértice de cada lado de $p$. Para isso, suponha que existam dois vértices $x,y\in L$ tais que $x$ esteja entre $y$ e $p$. Então as arestas $\overline{vy}$ e $\overline{wx}$ se interceptam num ponto mais próximo de $\hat L$ do que $v$ e, como o grafo é planar, deve existir um vértice nessa interseção, contradizendo a escolha de $v$. Mas como $|L|\geq3$, $L$ tem que possuir exatamente $3$ pontos: $p$ e um ponto de cada lado de $p$, que vamos chamar de $x$ e $y$.
 
-Agora vamos mostrar que $S=\{v,w\}$. Suponha que $S$ contém um terceiro ponto $u$. $u$ não está na mesma reta que $p$, $v$ e $w$ pois $L$ tem tamanho máximo. Pela escolha de $v$ e $w$, $u$ está mais longe de $\hat L$ do que $w$. Então $\overline{uv}$ intercepta $\overline{wx}$ ou $\overline{wy}$ num ponto mais próximo de $\hat L$ do que $w$, contradizendo a escolha de $w$. Logo $|S|=2$. Então $|T|\leq2$.
+    Agora vamos mostrar que $S=\{v,w\}$. Suponha que $S$ contém um terceiro ponto $u$. $u$ não está na mesma reta que $p$, $v$ e $w$ pois $L$ tem tamanho máximo. Pela escolha de $v$ e $w$, $u$ está mais longe de $\hat L$ do que $w$. Então $\overline{uv}$ intercepta $\overline{wx}$ ou $\overline{wy}$ num ponto mais próximo de $\hat L$ do que $w$, contradizendo a escolha de $w$. Logo $|S|=2$. Então $|T|\leq2$.
 
-Se $T=\emptyset$, então $P$ satisfaz $(c)$. Suponha que $T\neq\emptyset$. Seja $u$ um ponto de $T$ e $q$ a interseção da reta que contém $u$ e $v$ e da reta $\hat L$. Suponha que $q$ não seja um vértice de $L$. Se $q$ está entre $x$ e $y$, então as arestas $\overline{vu}$ e $\overline{px}$ ou $\overline{py}$ se interceptam em $q$, e como o grafo é planar, $q$ tem que ser um vértice do grafo, o que é uma contradição. Similarmente, se $q$ não está entre $x$ e $y$, as arestas $\overline{uv}$ e $\overline{wx}$ ou $\overline{wy}$ se interceptam no ponto $q$, gerando uma contradição. Então $u$ intercepta $\hat L$ num vértice. Esse vértice não pode ser $p$, pois se fosse isso contradiria a escolha de $L$.
+    Se $T=\emptyset$, então $P$ satisfaz $(c)$. Suponha que $T\neq\emptyset$. Seja $u$ um ponto de $T$ e $q$ a interseção da reta que contém $u$ e $v$ e da reta $\hat L$. Suponha que $q$ não seja um vértice de $L$. Se $q$ está entre $x$ e $y$, então as arestas $\overline{vu}$ e $\overline{px}$ ou $\overline{py}$ se interceptam em $q$, e como o grafo é planar, $q$ tem que ser um vértice do grafo, o que é uma contradição. Similarmente, se $q$ não está entre $x$ e $y$, as arestas $\overline{uv}$ e $\overline{wx}$ ou $\overline{wy}$ se interceptam no ponto $q$, gerando uma contradição. Então $u$ intercepta $\hat L$ num vértice. Esse vértice não pode ser $p$, pois se fosse isso contradiria a escolha de $L$.
 
-Suponha que existam dois pontos $u_1$ e $u_2$ em $T$. Se $u_1$ está na mesma reta que $v$ e $x$ e $u_2$ está na mesma reta que $v$ e $y$. As arestas $\overline{u_1y}$ e $\overline{u_2x}$ se interceptam em um ponto de $T$ que não está na mesma reta que $v$ e $x$ nem que $v$ e $y$, o que é uma contradição. Se $u_1$ e $u_2$ estão na mesma reta que $v$ e $x$, suponha sem perda de generalidade que $u_1$ está entre $x$ e $u_2$, então as arestas $\overline{u_1y}$ e $\overline{u_2x}$ se interceptam em um ponto de $T$ que não está na mesma reta que $v$ e $x$ nem que $v$ e $y$, o que é uma contradição. Do mesmo jeito, se $u_1$ e $u_2$ estão na mesma reta que $v$ e $y$ também temos uma contradição. Portanto $|T|=1$. Sem perda de generalidade, digamos que $u$ é colinear com $v$ e $x$. Assim $\{p,u,v,x,y,w\}$ forma o grafo $(e)$ da figura \ref{fig:visibilidadeplanar}
+    Suponha que existam dois pontos $u_1$ e $u_2$ em $T$. Se $u_1$ está na mesma reta que $v$ e $x$ e $u_2$ está na mesma reta que $v$ e $y$. As arestas $\overline{u_1y}$ e $\overline{u_2x}$ se interceptam em um ponto de $T$ que não está na mesma reta que $v$ e $x$ nem que $v$ e $y$, o que é uma contradição. Se $u_1$ e $u_2$ estão na mesma reta que $v$ e $x$, suponha sem perda de generalidade que $u_1$ está entre $x$ e $u_2$, então as arestas $\overline{u_1y}$ e $\overline{u_2x}$ se interceptam em um ponto de $T$ que não está na mesma reta que $v$ e $x$ nem que $v$ e $y$, o que é uma contradição. Do mesmo jeito, se $u_1$ e $u_2$ estão na mesma reta que $v$ e $y$ também temos uma contradição. Portanto $|T|=1$. Sem perda de generalidade, digamos que $u$ é colinear com $v$ e $x$. Assim $\{p,u,v,x,y,w\}$ forma o grafo $(e)$ da figura \ref{fig:visibilidadeplanar}
 \end{proof}
 \begin{corolario}
     Seja $P$ um conjunto finito de pontos no plano. As seguintes afirmações são equivalentes:
@@ -233,9 +254,9 @@ Suponha que existam dois pontos $u_1$ e $u_2$ em $T$. Se $u_1$ está na mesma re
     \end{itemize}
 \end{corolario}
 \begin{proof}
-Se $P$ satisfaz $(a)$, $(b)$, $(c)$ ou $(e)$ do teorema \ref{visibilidadeplanar}, é fácil ver que $\mathcal V(P)$ não tem $K_4$.
+    Se $P$ satisfaz $(a)$, $(b)$, $(c)$ ou $(e)$ do teorema \ref{visibilidadeplanar}, é fácil ver que $\mathcal V(P)$ não tem $K_4$.
 
-Se $\mathcal V(P)$ não tem $K_4$, pelo teorema \ref{planork4}, $\mathcal V(P)$ é planar. Logo, pelo teorema \ref{visibilidadeplanar}, $P$ satisfaz $(a)$, $(b)$, $(c)$, $(d)$ ou $(e)$. Mas como $(d)$ possiu $K_4$, $P$ satisfaz $(a)$, $(b)$, $(c)$ ou $(e)$.
+    Se $\mathcal V(P)$ não tem $K_4$, pelo teorema \ref{planork4}, $\mathcal V(P)$ é planar. Logo, pelo teorema \ref{visibilidadeplanar}, $P$ satisfaz $(a)$, $(b)$, $(c)$, $(d)$ ou $(e)$. Mas como $(d)$ possiu $K_4$, $P$ satisfaz $(a)$, $(b)$, $(c)$ ou $(e)$.
 \end{proof}
 
 \begin{corolario}
@@ -243,18 +264,49 @@ Se $\mathcal V(P)$ não tem $K_4$, pelo teorema \ref{planork4}, $\mathcal V(P)$ 
 \end{corolario}
 
 \section{Caso $k=5$}
-\subsection{Erdös-Szekeres Theorem}
-Provar teorema de Erdös-Szekers sobre polígonos convexos (Happy ending problem).
+\subsection{Pontos em posição convexa}
 \cite{pentagon}
+
 \section{Para conjunstos infinitos de pontos}
-\cite{infinity}
+Em 2010\cite{infinity}, Atila Pór e David Wood mostraram que a conjectura \ref{conj1} não vale para conjuntos infinitos de pontos com a seguinte construção:
+
+\begin{teorema}
+    Existem conjuntos infinitos enumeráveis de pontos sem 4 pontos colineares e sem 3 pontos visíveis dois a dois.
+\end{teorema}
+\begin{proof}
+    Vamos construir indutivamente um conjunto de pontos com tal propriedade.
+
+    Sejam $x_1$, $x_2$ e $x_3$ três pontos não colineares no plano.
+
+    Dados pontos $x_1,...,x_{n-1}$ não conlineares, vamos definir o ponto $x_n$ da seguinte forma: pelo teorema de Sylvester-Gallai, existe uma reta que passa por exatamente dois pontos de $x_1,...,x_{n-1}$. Seja $\mathcal L=\overleftrightarrow{x_ix_j}$ a reta que passa or exatamente dois pontos de $x_1,...,x_{n-1}$ com $i<j$ e com i mínimo entre as com j mínimo. Coloque $x_n$ no segmento $\overline{x_ix_j}$ tal que ela seja a única reta que contenha $x_n$ e mais dois pontos (isso é possível, já que somente uma quantidade finita de pontos de $\mathcal L$ não pode ser escolhida).
+
+    Vamos chamar de $P = \{x_i|i\in \mathbb N\}$. Por construção, $P$ não tem 4 pontos colineares e se $x_i$ e $x_k$ com $i<k$ são visíveis então existe um outro ponto colinear $x_j$ com $j<k$ e $x_k$ está no segmento $\overline{x_ix_j}$.
+
+    Suponha que $x_i$, $x_j$ e $x_k$ são dois a dois visíveis com $i<j<k$. Então existem pontos $x_{i'}$ e $x_{j'}$ com $i'<k$ e $j'<k$ tais que $x_k$ está no segmento $\overline{x_ix_{i'}}$ e no segmento $\overline{x_jx_{j'}}$. Pela escolha de $x_k$, só existe uma reta que contém $x_k$ e mais dois pontos entre $x_1,...x_{k-1}$. Então $i=j'$ e $j=i'$. Mas então $P\cap\overline{x_ix_j}=\{x_i,x_j,x_k\}$, ou seja, $x_i$ e $x_j$ não são visíveis, ou seja, $x_i$ e $x_j$ não são visíveis.
+
+    Portanto não existem 3 pontos visíveis dois a dois em $P$.
+
+\end{proof}
+
 \section{Dificuldades encontradas}
 \subsection{The orchard problem e o grafo de Turán}
 Problema citado em \cite{visblock}, solução do orchard problem tem menos arestas do que o grafo de Turán para $k\geq 5$
 
 \subsection{Contuntos de pontos sem heptágonos vazios}
-Construção de conjuntos arbitrariamente grandes de pontos sem heptágonos vazios de \cite{heptagon}
+Dado que o teorema de Erdös-Szekeres vale, Erdös colocou o problema de determinar se para um dado $n$ existe um $g(n)$ tal que todo conjunto com $g(n)$ pontos em posição geral contém um $n$-ágono vazio.
 
+Se essa questão fosse respondida afirmativamente, a conjectura \ref{conj1} sairia como corolário.
+
+Para $n=3$ e $n=4$ é fácil ver que $g(3)=3$ e $g(4)=5$. Harborth\cite{Harborth1978} provou que $g(5)=10$ e Gerken\cite{Gerken} e Nicolas\cite{Nicolas} provaram que $g(6)$ existe.
+
+No entanto, Horton\cite{heptagon} mostrou uma constrção de conjuntos arbitrariamente grandes sem heptágonos vazios.
+
+\begin{teorema}
+Existem conjuntos arbitrariamente grandes sem heptágonos.
+\end{teorema}
+\begin{proof}
+
+\end{proof}
 \chapter{Bloqueadores de visibilidade}
 
 \section{Ordem de crescimento de $b(n)$}
