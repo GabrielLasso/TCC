@@ -16,7 +16,8 @@
 \date{}
 
 \newtheorem{conjectura}{Conjectura}
-\newtheorem{teorema}{Teorema}[section]
+\newtheorem{lema}{Lema}
+\newtheorem{teorema}{Teorema}
 \newtheorem{corolario}{Corolário}[teorema]
 
 \begin{document}
@@ -25,12 +26,13 @@
 \chapter{Introdução}
 
 \section{Motivação}
-Aqui faremos um estudo de um problema de visibilidade que surgiu em 2005 e até o começo dessa década chamou a atenção de vários pesquisadores. Qual a quantidade máxima de pontos no plano de forma que não tenha conjuntos grandes de pontos colineares nem de pontos visíveis? A natureza desse problema lembra o problema de Ramsey, porém ele possui uma cara geométria e é extremamente difícil de lidar, tanto que não se sabe se existe essa quantidade máxima.
+A teoria de Ramsey é um campo da combinatória que estuda questôes como "quão grande uma estrutura deve ser para que ela possua uma subestrutura com uma certa propriedade?". Um exemplo clássico é o problema da festa: quantas pessoas tem que ter em uma festa para que nela existam três pessoas que se conhecem duas a duas não conhecem nenhuma das outras duas. Essa teoria possui aplicações em diversos outros campos da matemática, como a topologia, a teoria ergódica e a geometria.\cite{ES}
 
-Se dois pontos não são visíveis, é porque um terceiro bloqueia a visibilidade deles. Outro problema estudado aqui é sobre o tamanho mínimo do conjunto de bloqueadores para um conjunto de pontos.
+Aqui fazemos um estudo de um problema geométrico ligado a teoria de Ramsey. Tal problema foi colocado em 2005 por Jan Kára, Attila Pór e David R. Wood enquanto estudavam o número cromático de grafos de visibilidade. O problema pode ser colocado da seguinte forma: "Quão grande deve ser um conjunto de pontos para que ele conhtenha $l$ pontos colineares ou $k$ pontos visíveis dois a dois?".
+
+Uma observação sobre esse problema é que se dois pontos não são visíveis, então existe um terceiro que bloqueia a visibilidade deles. Outro problema estudado aqui é sobre o tamanho mínimo do conjunto de bloqueadores para um conjunto de pontos.
 
 Todos esses conceitos serão definidos com mais formalidade mais pra frente. O primeiro problema é conhecido como \textbf{conjectura big-line-big-clique} e o segundo é uma questão natural sobre \textbf{bloqueadores de visibilidade}.
-
 
 \section{Estrutura do trabalho}
 No caítulo 2 vamos definir alguns conceitos que serão base para os demais, assim como demonstrar algumas propriedades chaves desses conceitos. No capítulo 3 vamos mostrar os resultados conhecidos sobre a conjectura big-line-big-clique, mostrar algumas dificuldades encontradas na tentativa de resolver esse problema e discutir alguns fatos sobre ele. No capítulo 4 vamos focar no problema dos bloqueadores de visibilidade, mostrando cotas superiores e inferiores conhecidas e discutindo algumas coisas em aberto que as pessoas acreditam que sejam verade.
@@ -43,22 +45,24 @@ Se $G$ é um grafo, chamamos de $V(G)$ seu conjunto de vértices e de $E(G)$ seu
 
 Chamamos \textbf{ordem} de um grafo a cardinalidade de seu conjunto de vértices.
 
-Se uma aresta $e={u,v}\in E(G)$, dizemos que $u$ e $v$ são \textbf{vizinhos} ou \textbf{adjacentes}.
+Se uma aresta $e=\{u,v\}\in E(G)$, dizemos que $u$ e $v$ são \textbf{vizinhos} ou \textbf{adjacentes}.
 
 Um grafo \textbf{completo} é um grafo em que todos dois vértices distintos são adjacentes. Chamamos o grafo completo de ordem $n$ de $K_n$.
 
-Se $G$ é um grafo e  $S\subset V(G)$ é um conjunto de vértices, chamamos de \textbf{subgrafo} de $G$ induzido por $S$ o grafo $G[S]=(S,E_S)$, em que $E_S=\{{u,v}\in E(G)|u,v\in S\}$. Nesse caso, dizemos que $G$ contém uma cópia de $G[S]$ ou simplesmente que $G$ contém $G[S]$, ou ainda que $G$ possiu $G[S]$.
+Se $G$ é um grafo e  $S\subset V(G)$ é um conjunto de vértices, chamamos de \textbf{subgrafo} de $G$ induzido por $S$ o grafo $G[S]=(S,E_S)$, em que $E_S=\{{u,v}\in E(G)|u,v\in S\}$. Nesse caso, dizemos que $G$ contém uma cópia de $G[S]$ ou simplesmente que $G$ contém $G[S]$, ou ainda que $G$ possui $G[S]$.
 
-Um \textbf{k-clique} é um conjunto de vértices $C$ tal que $G[C]$ é um grafo completo de ordem k.
+Uma \textbf{k-clique} é um conjunto de vértices $C$ tal que $G[C]$ é um grafo completo de ordem k.
+
+Um grafo é \textbf{planar} se pode ser desenhado no plano sem que as curvas que representam as arestas se cruzem. Tal desenho é chamado de \textbf{imersão do grafo no plano}. Um grafo \textbf{plano} é um grafo planar com uma imersão no plano.
 
 \section{Grafo de visibilidade}
 Na sessão anterior, definimos conceitos básicos de teoria dos grafos. Aqui vamos estudar um caso bem particular.
 
-Seja $P$ é um conjunto de pontos no plano tal que todo ponto de $P$ é isolado e $x,y\in P$. Dizemos que $x$ e $y$ são visíveis em $P$ se $\overline{xy}\cap P =\{x,y\}$. $p_1, p_2, ..., p_n$ são visíveis se são visíveis dois a dois.
+Seja $P$ um conjunto de pontos no plano e $x,y\in P$. Dizemos que $x$ e $y$ são visíveis em $P$ se $\overline{xy}\cap P =\{x,y\}$. $p_1, p_2, ..., p_n$ são visíveis se são visíveis dois a dois.\footnote{Vamos considerar só conjuntos que são densos em nenhum lugar, i.e. o interior de $P$ é vazio.}
 
 O grafo de visibilidade de um conjunto $P$ de pontos no plano é o grafo construído da seguinte forma: o conjunto de vértices é $P$ e há uma aresta entre dois vértices $x$ e $y$ se $x$ e $y$ são visíveis. Denotamos esse grafo por $\mathcal V(P)$ e se ${p,q}$ é uma aresta, às vezes nos referimos a ela como o segmento aberto $\overline{pq}$.
 
-Dizemos que um grafo de visibilidade é planar se suas arestas não se interceptarem.
+Dizemos que um grafo de visibilidade é plano se suas arestas não se interceptam.
 
 \begin{teorema}\cite{visibility}\label{planork4}
     Todo grafo de visibilidade finito é planar ou contém uma cópia de $K_4$.
@@ -69,23 +73,59 @@ Dizemos que um grafo de visibilidade é planar se suas arestas não se intercept
     Como $G$ não é planar, existe alguma aresta $\overline{ab}$ que intercepta com outras (pelo menos uma outra). A reta $\overleftrightarrow{ab}$ separa o plano em dois semiplanos $D$ e $E$. Seja $p$ o ponto de $D$ mais próximo do segmento $\overline{ab}$ e $q$ o ponto de $E$ mais próximo do segmento $\overline{ab}$. Pela escolha de $p$ e $q$, os pontos $a$, $b$, $p$ e $q$ são visíveis, logo $G[\{a,b,p,q\}]$ é um $K_4$.
 \end{proof}
 
+\section {Teoria de Ramsey}
+
+\subsection {Problema da festa}
+
+\subsection {Teorema de Ramsey}
+
+\subsection {Generalizando para hipergrafos}
+
 \section{Geometria combinatória}
 Vamos dar algumas definições a respeito de conjuntos de pontos no plano. Seja $P$ um conjunto finito de pontos no plano e $conv(P)$ o casco convexo de $P$. Dizemos que $P$ está em \textbf{posição geral} se não existirem três pontos colineares em $P$. 
 
 Dizemos que $P$ está em \textbf{posição convexa} se todo ponto de $P$ estiver na fronteira de $conv(P)$.
 
-Um ponto $v\in P$ é uma \textbf{ponta} de $P$ se $conv(P)\neq conv(P\backslash v)$.
+Um ponto $v\in P$ é um \textbf{vértice} de $P$ se $conv(P)\neq conv(P\backslash v)$.
 
-Se todos os pontos de $P$ forem pontas, dizemos que $P$ está em \textbf{posição estritamente convexa}.
+Se todos os pontos de $P$ forem vértices, dizemos que $P$ está em \textbf{posição estritamente convexa}.
 
-Um \textbf{$k$-ágono} (respectivamente um \textbf{$k$-ágono estritamente convexo}) é o casco convexo de um conjunto de $k$ pontos (respectivamente em posição estritamente convexa).
+Um \textbf{$k$-ágono} é o casco convexo de um conjunto de $k$ pontos em posição estritamente convexa.
 
-Se $X$ for um subconjunto de $P$ de $k$ pontos em posição estritamente convexa tal que $conv(X)\cap P=X$, então  $conv(X)$ é um \textbf{$k$-buraco} ou um \textbf{$k$-ágono vazio estritamente convexo} ou simplesmente um \textbf{$k$-ágono vazio}.
+Se $X$ for um subconjunto de $P$ de $k$ pontos em posição estritamente convexa tal que $conv(X)\cap P=X$, então  $conv(X)$ é um \textbf{$k$-buraco} ou um \textbf{$k$-ágono vazio}.
+
+Uma \textbf{triangulação} de um $k$-ágono $T$ é um conjunto de $3$-ágonos tal que os vértices dos $3$-ágonos também são vértices de $T$, $T$ é a união de todos os $3$-ágonos e a interseção de quaiquer dois $3$-ágonos é vazia ou um segmento de reta.
 
 Chamamos $3$-ágonos de triângulos, $4$-ágonos de quadriláteros, $5$-ágonos de pentágonos, etc.
 
-\subsection{Teorema de Erdös-Szekeres}
-Provar teorema de Erdös-Szekers sobre polígonos convexos (Happy ending problem).
+\subsection{Teorema de Erd\H os-Szekeres}
+Um resultado clássico da teoria de Ramsey na geometria combinatória é o seguinte:
+\begin{teorema}[Erd\H os-Szekeres, 1935]
+    Dado um inteiro positivo $k$, existe um inteiro $ES(k)$ tal que todo conjunto com pelo menos $ES(k)$ pontos em posição geral contém $k$ pontos em posição estritamente convexa.
+\end{teorema}
+
+Vamos mostrar uma demonstração dada por Yujia Pan em \cite{ES} e, para isso, primeiro vamos resolver um caso particular com $k=5$:
+\begin{lema}
+    Todo conjunto com $5$ pontos em posição geral contém quatro pontos em posição estritamente convexa.
+\end{lema}
+\begin{proof}
+    Seja $P$ um conjunto com $5$ pontos em posição geral. Se $conv(P)$ for um pentágono ou um quadrado, o lema é trivial.
+    Então vamos supor que $conv(P)$ seja um triângulo. Tal triângulo possui dois pontos de $P$, $u$ e $v$, em seu interior. A reta que contém esses dois pontos separa os vértices do triângulo, dois ($p$ e $q$) de um lado e um ($x$) do outro lado. Então $\{u,v,p,q\}$ são quatro pontos em posição estritamente convexa.
+\end{proof}
+
+    Agora podemos demonstrar o teorema:
+\begin{proof}(Teorema de Erd\H os-Szekeres)
+    Dado um $k$ inteiro positivo, considere $P$ um conjunto com pelo menos $R^4(k,5)$ pontos em posição geral. Para cada subconjunto $X$ de $P$ de tamanho $4$, vamos colorir ele de vermelho se $conv(X)$ for um quadrilátero e de azul de $conv(X)$ for um triângulo. Pelo teorema de Ramsey para hipergrafos, uma das duas conddições é satisfeita:
+    \begin{itemize}
+        \item $P$ tem um subconjunto de tamanho $k$ tal que todo subconjunto dele com 4 elementos é vermelho.
+        \item $P$ tem um subconjunto de tamanho $5$ tal que todo subconjunto dele com 4 elementos é azul.
+    \end{itemize}
+    Pelo lema, a segunda opção não é possível, pois ela implicaria que um conjunto com $5$ pontos não tem 4 pontos em posição estritamente convexa. Então existe um subconjunto de tamanho $k$ tal que todo subconjunto dele com $4$ elementos é vermelho. Seja $H$ tal conjunto.
+
+    Vamos mostrar que $H$ está em posição estritamente convexa. Para isso, suponha o contrário. Então existe algum ponto $x$ de $H$ no interior de $conv(H)$. Considere uma triangulação de $conv(H)$. $x$ está dentro de algum triângulo da triangulação. Os três vértices desse triângulo juntos com $x$ formam um conjunto de $4$ pontos que deveria ter sido pintado de azul, o que é uma contradição.
+
+    Logo $H$ é um conjunto de $k$ pontos em posição estritamente convexa.
+\end{proof}
 
 \subsection{Teorema de Sylvester-Gallai}
 Todo contunto finito de pontos tem todos os pontos colineares ou existe uma reta que passa por exatamente dois desses pontos.
@@ -93,14 +133,14 @@ Todo contunto finito de pontos tem todos os pontos colineares ou existe uma reta
 \chapter{Big-Line-Big-Clique conjecture}
 A conjectura seguinte foi proposta por \cite{visibilitygraph} em 2005, e ainda não se sabe se ela vale para valores a partir de  $k=6$ e $l=4$.
 \begin{conjectura}\label{conj1}
-    Dados dois inteiros $k,l\geq2$, existe um $n=n(k,l)$ tal que todo conjunto finito $P$ com pelo menos $n$ pontos no plano contém $k$ pontos visíveis (alternativamente, $\mathcal V(P)$ possui um $k$-clique) ou $l$ pontos colineares.
+    Dados dois inteiros $k,l\geq2$, existe um $n=n(k,l)$ tal que todo conjunto finito $P$ com pelo menos $n$ pontos no plano contém $k$ pontos visíveis (alternativamente, $\mathcal V(P)$ possui uma $k$-clique) ou $l$ pontos colineares.
 \end{conjectura}
 
 
 Para nos habituarmos com o problema, vamos começar pelos casos mais básicos:
 
 \section{Casos triviais}
-Primeiramente, se $k=2$ ou $l=2$, com certeza todo conjunto com pelo menos dois pontos tem dois pontos colineares e dois pontos visíveis.
+Primeiramente, se $k=2$ (ou $l=2$), com certeza todo conjunto com pelo menos dois pontos tem dois pontos visíveis (e dois pontos colineares).
 
 Se $k=3$, ou se tem três pontos visíveis ou todos os pontos no conjunto são colineares, então $n(3,l)=max\{3,l\}$.
 
@@ -110,7 +150,7 @@ Se $l=3$, ou todos os pontos são visíveis para todos os outros ou algum ponto 
 \section{Caso $k=4$}
 Vamos mostrar que os conjuntos que não possuem quatro pontos visíveis possuem muitos pontos colineares. Isto é, para todo $l$ existe um $n$ tal que todo conjunto $P$ com pelo menos $n$ pontos que não possui quatro pontos visívels possui pelo menos $l$ pontos colineares.
 
-Pelo teorema \ref{planork4}, um conjunto que não possui quatro pontos visíveis possui grafo de visibilidade planar. O teorema a seguir caracteriza os grafos de visibilidade planares:
+Pelo teorema \ref{planork4}, um conjunto que não possui quatro pontos visíveis possui grafo de visibilidade planar. Vamos usar o seguinte lema que caracteriza os grafos de visibilidade planares:
 
 \begin{figure}
     \begin{tikzpicture}
@@ -214,8 +254,8 @@ Pelo teorema \ref{planork4}, um conjunto que não possui quatro pontos visíveis
     \label{fig:visibilidadeplanar}
 \end{figure}
 
-\begin{teorema}\cite{planar}\label{visibilidadeplanar}
-    Seja $P$ um conjunto finito de pontos no plano. Então $\mathcal V(P)$ é planar se e somente se satisfaz uma das condições:
+\begin{lema}\cite{planar}\label{visibilidadeplanar}
+    Seja $P$ um conjunto finito de pontos no plano. Então $\mathcal V(P)$ é plano se e somente se satisfaz uma das condições:
     \begin{enumerate}[label=(\alph*)]
         \item
             Todos os pontos de $P$ são colineares.
@@ -228,7 +268,7 @@ Pelo teorema \ref{planork4}, um conjunto que não possui quatro pontos visíveis
         \item
             $\mathcal V(P)$ é o grafo $(e)$ desenhado na figura \ref{fig:visibilidadeplanar}
     \end{enumerate}
-\end{teorema}
+\end{lema}
 \begin{proof}
     Como pode ser visto na figura \ref{fig:visibilidadeplanar} e pode ser facilmente demonstrado, se um grafo de visibilidade satisfaz alguma das condições $(a)-(e)$, ele é planar. Para mostrar a outra direção, seja $P$ um conjunto finito de pontos no plano tal que $\mathcal V(P)$ é planar.
 
@@ -244,7 +284,7 @@ Pelo teorema \ref{planork4}, um conjunto que não possui quatro pontos visíveis
 
     Suponha que existam dois pontos $u_1$ e $u_2$ em $T$. Se $u_1$ está na mesma reta que $v$ e $x$ e $u_2$ está na mesma reta que $v$ e $y$. As arestas $\overline{u_1y}$ e $\overline{u_2x}$ se interceptam em um ponto de $T$ que não está na mesma reta que $v$ e $x$ nem que $v$ e $y$, o que é uma contradição. Se $u_1$ e $u_2$ estão na mesma reta que $v$ e $x$, suponha sem perda de generalidade que $u_1$ está entre $x$ e $u_2$, então as arestas $\overline{u_1y}$ e $\overline{u_2x}$ se interceptam em um ponto de $T$ que não está na mesma reta que $v$ e $x$ nem que $v$ e $y$, o que é uma contradição. Do mesmo jeito, se $u_1$ e $u_2$ estão na mesma reta que $v$ e $y$ também temos uma contradição. Portanto $|T|=1$. Sem perda de generalidade, digamos que $u$ é colinear com $v$ e $x$. Assim $\{p,u,v,x,y,w\}$ forma o grafo $(e)$ da figura \ref{fig:visibilidadeplanar}
 \end{proof}
-\begin{corolario}
+\begin{teorema}
     Seja $P$ um conjunto finito de pontos no plano. As seguintes afirmações são equivalentes:
     \begin{itemize}
         \item
@@ -252,11 +292,11 @@ Pelo teorema \ref{planork4}, um conjunto que não possui quatro pontos visíveis
         \item
             $\mathcal V(P)$ não tem $K_4$.
     \end{itemize}
-\end{corolario}
+\end{teorema}
 \begin{proof}
     Se $P$ satisfaz $(a)$, $(b)$, $(c)$ ou $(e)$ do teorema \ref{visibilidadeplanar}, é fácil ver que $\mathcal V(P)$ não tem $K_4$.
 
-    Se $\mathcal V(P)$ não tem $K_4$, pelo teorema \ref{planork4}, $\mathcal V(P)$ é planar. Logo, pelo teorema \ref{visibilidadeplanar}, $P$ satisfaz $(a)$, $(b)$, $(c)$, $(d)$ ou $(e)$. Mas como $(d)$ possiu $K_4$, $P$ satisfaz $(a)$, $(b)$, $(c)$ ou $(e)$.
+    Se $\mathcal V(P)$ não tem $K_4$, pelo teorema \ref{planork4}, $\mathcal V(P)$ é planar. Logo, pelo lema \ref{visibilidadeplanar}, $P$ satisfaz $(a)$, $(b)$, $(c)$, $(d)$ ou $(e)$. Mas como $(d)$ possui $K_4$, $P$ satisfaz $(a)$, $(b)$, $(c)$ ou $(e)$.
 \end{proof}
 
 \begin{corolario}
@@ -264,10 +304,63 @@ Pelo teorema \ref{planork4}, um conjunto que não possui quatro pontos visíveis
 \end{corolario}
 
 \section{Caso $k=5$}
-\subsection{Pontos em posição convexa}
 \cite{pentagon}
+\cite{pentagon2}
+Para resolver esse caso, teremos que estudar quando que um conjunto de pontos em posição convexa tem muitos pontos em posição estritamente convexa com a finalidade de generalizar o teorema de Erd\H os-Szekeres para conjuntos com colinearidades.
 
-\section{Para conjunstos infinitos de pontos}
+\subsection{Pontos em posição convexa}
+Considere o seguinte problema: dado um conjunto $P$ de pontos em posição convexa no plano, ache um maior subconjunto de $P$ de pontos em posição estritamente convexa.
+
+Para $k,l$ inteiros positivos, seja $q(k,l)$ o menor inteiro tal que todo conjunto com pelo menos $q(k,l)$ pontos em posição convexa no plano tenha $l$ pontos colineares ou $k$ pontos em posição estritamente convexa.
+
+\begin{lema}
+    Para $k,l\geq 3$, 
+    $$q(k,l)=
+    \begin{cases}
+        \frac{1}{2}(k-1)(l-1)+1 \text{ se }k\text{ é ímpar}\\
+    \frac{1}{2}(k-1)(l-1)+2  \text{ se }k\text{ é par}
+    \end{cases}$$
+\end{lema}
+\begin{proof}
+
+\end{proof}
+
+Com isso, podemos generalizar o teorema de Erd\H os-Szekeres como foi feito em \cite{pentagon}.
+
+\begin{teorema}
+    Para todo inteiro $k$, todo conjunto com $ES(k)$ pontos contém $k$ pontos em posição convexa (não necessariamente estrita).
+\end{teorema}
+\begin{proof}
+
+\end{proof}
+\begin{teorema}
+    Dados inteiros $k\geq 3$ e $k\geq 2$, existe um inteiro $ES(k,l)$ tal que todo conjunto $P$ com pelo menos $ES(k,l)$ contém 
+    \begin{itemize}
+        \item $l$ pontos colineares, ou
+        \item $k$ pontos em posição estritamente convexa.
+    \end{itemize}
+\end{teorema}
+\begin{proof}
+
+\end{proof}
+
+\subsection{Pentágonos vazios}
+\begin{teorema}
+    Para todo inteiro $l\geq 2$, todo conjunto finito com pelo menos $ES(\frac{}{})$ pontos no plano possui 
+    \begin{itemize}
+        \item $l$ pontos colineares, ou
+        \item um pentágono vazio.
+    \end{itemize}
+\end{teorema}
+\begin{proof}
+
+\end{proof}
+
+\begin{corolario}
+    A conjectura \ref{conj1} é verdadeira para $k=5$.
+\end{corolario}
+
+\section{Para conjuntos infinitos de pontos}
 Em 2010\cite{infinity}, Atila Pór e David Wood mostraram que a conjectura \ref{conj1} não vale para conjuntos infinitos de pontos com a seguinte construção:
 
 \begin{teorema}
@@ -292,8 +385,8 @@ Em 2010\cite{infinity}, Atila Pór e David Wood mostraram que a conjectura \ref{
 \subsection{The orchard problem e o grafo de Turán}
 Problema citado em \cite{visblock}, solução do orchard problem tem menos arestas do que o grafo de Turán para $k\geq 5$
 
-\subsection{Contuntos de pontos sem heptágonos vazios}
-Dado que o teorema de Erdös-Szekeres vale, Erdös colocou o problema de determinar se para um dado $n$ existe um $g(n)$ tal que todo conjunto com $g(n)$ pontos em posição geral contém um $n$-ágono vazio.
+\subsection{Conjuntos de pontos sem heptágonos vazios}
+Dado que o teorema de Erd\H os-Szekeres vale, Erd\H os colocou o problema de determinar se para um dado $n$ existe um $g(n)$ tal que todo conjunto com $g(n)$ pontos em posição geral contém um $n$-ágono vazio.
 
 Se essa questão fosse respondida afirmativamente, a conjectura \ref{conj1} sairia como corolário.
 
