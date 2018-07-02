@@ -3,13 +3,18 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsthm}
+\usepackage{mathtools}
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{amssymb}
 \usepackage{enumitem}
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 \usetikzlibrary{shapes}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 
 \title{\textbf{Big-Line-Big-Clique Conjecture e Bloqueadores de Visibilidade}}
 \author{Gabriel K. Lasso\\ Orientador: Carlos E. Ferreira}
@@ -313,12 +318,12 @@ Considere o seguinte problema: dado um conjunto $P$ de pontos em posição conve
 
 Para $k,l$ inteiros positivos, seja $q(k,l)$ o menor inteiro tal que todo conjunto com pelo menos $q(k,l)$ pontos em posição convexa no plano tenha $l$ pontos colineares ou $k$ pontos em posição estritamente convexa.
 
-\begin{lema}
+\begin{lema}\label{convex}
     Para $k,l\geq 3$, 
     $$q(k,l)=
     \begin{cases}
         \frac{1}{2}(k-1)(l-1)+1 \text{ se }k\text{ é ímpar}\\
-    \frac{1}{2}(k-1)(l-1)+2  \text{ se }k\text{ é par}
+    \frac{1}{2}(k-2)(l-1)+2  \text{ se }k\text{ é par}
     \end{cases}$$
 \end{lema}
 \begin{proof}
@@ -327,11 +332,19 @@ Para $k,l$ inteiros positivos, seja $q(k,l)$ o menor inteiro tal que todo conjun
 
 Com isso, podemos generalizar o teorema de Erd\H os-Szekeres como foi feito em \cite{pentagon}.
 
-\begin{teorema}
+\begin{teorema}\label{EScolinear}
     Para todo inteiro $k$, todo conjunto com $ES(k)$ pontos contém $k$ pontos em posição convexa (não necessariamente estrita).
 \end{teorema}
 \begin{proof}
+    Sejam $P$ e $P'$ são dois conjuntos de pontos no plano com cada ponto de $P$ associado a um único ponto de $P'$. Se para todos $v\in P$ e $v'\in P'$ associados vale que $dist(v,v')<\epsilon$, dizemos que $P'$ é uma $\epsilon$-perturbação de $P$. Dizemos que $P'$ é uma perturbação de $P$ se é uma $\epsilon$-perturbação para algum $\epsilon$.
+    
+    Vamos mostrar o seguinte: para todo conjunto de pontos $P$, existe uma perturbação $P'$ de $P$ em posição geral tal que se $S'$ é um subconjunto de $P'$ em posição estritamente convexa então $S\in P$ (associado a $S'$) está em posição convexa.
+    Daí, o teorema de Erd\H os-Szekeres garante que existe para todo $k$ vai existir um $P'$ com $ES(k)$ pontos e $S'\in P'$ em posição estritamente convexa e assim o teorema estará provado.
+    Para cada tripla ordenada $(u,v,w)$ de pontos de $P$, existe um $\mu>0$ tal que para todo $0<\epsilon<\mu$ toda $\epsilon$-perturbação mantém a orientação\footnote{A orientação de uma tripla ordenadada de pontos diz se eles são colineares, se viram para a esquerda ou se para a direita.} desses pontos. Como a quantidade de triplas assim são finitas, pegamos $\mu^*$ o $\mu$ mínimo. Seja $P'$ uma $\mu^*$-perturbação de $P$ em posição geral.
+    
+    Seja $S'$ um subconjunto de $P'$ em posição estritamente convexa. Considere $S'$ e sentido horário. Então a orientação de toda tripla de pontos seguidos de $S'$ é para a direita. Como tal perturbação preservou a orientação das triplas não colineares, o conjunto $S$ associado a $S'$ só possuia triplas colineares e orientadas para a direita, quando olhadas da mesma ordem que vimos em $S'$.
 
+    Portanto $S$ está em posição convexa.
 \end{proof}
 \begin{teorema}
     Dados inteiros $k\geq 3$ e $k\geq 2$, existe um inteiro $ES(k,l)$ tal que todo conjunto $P$ com pelo menos $ES(k,l)$ contém 
@@ -341,7 +354,16 @@ Com isso, podemos generalizar o teorema de Erd\H os-Szekeres como foi feito em \
     \end{itemize}
 \end{teorema}
 \begin{proof}
+    Basta mostrar que
+    $$
+    ES(k,l)\leq
+    \begin{cases}
+        ES(\frac{1}{2}(k-1)(l-1)+1) \text{ se }k\text{ é ímpar}\\
+        ES(\frac{1}{2}(k-2)(l-1)+2) \text{ se }k\text{ é par}
+    \end{cases}$$
+    Se $k$ é ímpar, seja $P$ um conjunto com $ES(\frac{1}{2}(k-1)(l-1)+1)$ pontos sem $l$ pontos colineares. Pelo teorema \ref{EScolinear}, $P$ possui $\frac{1}{2}(k-1)(l-1)+1$ pontos em posição convexa. Assim, pelo lema \ref{convex}, $P$ possui $k$ pontos em posição estritamente convexa.
 
+    Se $k$ é par, a prova é análoga.
 \end{proof}
 
 \subsection{Pentágonos vazios}
@@ -352,8 +374,49 @@ Com isso, podemos generalizar o teorema de Erd\H os-Szekeres como foi feito em \
         \item um pentágono vazio.
     \end{itemize}
 \end{teorema}
-\begin{proof}
+\subsubsection {Rascunho da prova}
+Considere um conjunto de pontos $P$. A imagem abaixo mostra o que são as camadas convexas de $P$.
 
+\begin{tikzpicture}
+    \foreach \point in {(-0.5,0),(5,4),(-1,3),(3,3),(1,-1),(1,-2),(0,-3),(4,1),(0,0),(4,-3),(3,2),(1,2),(1,1), (2,1)}{
+        \fill \point circle (2pt);
+    }
+
+    \draw[thin] (5,4) -- (4,-3) -- (4,-3) -- (0,-3) -- (0,-3) -- (-1,3) -- (5,4);
+    \draw[thin] (3,3) -- (4,1) -- (1,-2) -- (0,0) -- (1,2) -- (3,3);
+    \draw[thin] (1,1) -- (3,2) -- (1,-1) -- (1,1);
+    
+    \node(A1) at (5,0) {$A_1$};
+    \node(A2) at (3,-1) {$A_2$};
+    \node(A3) at (2,0) {$A_3$};
+\end{tikzpicture}
+
+Vamos supor que um conjunto sulficientemente grande de pontos não tem nenhum pentágono vazio e nem $l$ pontos colineares e achar uma contradição. Para isso, faremos o seguinte:
+\begin{enumerate}
+    \item Mostrar que tal conjunto tem $l$ camadas convexas não vazias.
+    \item Fixar um ponto $z$ que está dentro da $l$-ésima camada convexa.
+    \item Mostrar que, para que não tenham pentágonos vazios, muitos pontos tem que se alinhar com $z$ usando um conceito que chamaremos de \textit{arcos vazios}.
+\end{enumerate}
+
+\begin{proof}
+    Seja $l\geq 3$ e $k=\frac{(2l-1)^l-1}{2l-1}$ e considere um conjunto $P$ com pelo menos $ES(k)$ pontos.
+    
+    Um conjunto $X\subset P$ em posição convexa com pelo menos $k$ pontos é dito $k$-minimal se não existir outro conjunto $Y\subset P$ em posição convexa com pelo menos $k$ pontos tal que $conv(Y)\subsetneq conv(X)$.
+
+    Pelo teorema \ref{EScolinear}, $P$ possui algum conjunto de $k$ pontos em posição convexa. Seja $A_1$ um conjunto assim $k$-minimal.
+    
+    Vamos definir as camadas convexas $A_i$ a partir de $A_1$.
+    Para $i\in\{2,...,l-1\}$, seja $A_i$ os pontos de $P$ da fronteira de $(P\cap A_{i-1}) \setminus A_{i-1}$ e seja $A_l=(P\cap A_{i-1})\setminus A_{i-1}$.
+
+    Pelo lema \ref{convex} com $k=5$, para cada $i\in\{2,...,l\}$, quaisquer $2l-1$ pontos consecutivos em $A_i$ possuem $5$ pontos em posição estritamente convexa. Para que $P$ não tenha pentágonos vazios, o casco convexo desses $2l-1$ pontos deve conter um ponto de $A_{i-1}$.
+
+    Como $A_{i-1}$ contém $\floor{\frac{|A_{i-1}|}{2l-1}}$ conjuntos distintos de $2l-1$ pontos consecutivos, afirmo que
+    $$|A_i|\geq\floor{\frac{|A_{i-1}|}{2l-1}}>\frac{|A_{i-1}|}{2l-1}-1$$
+    E disso concluímos
+    $$|A_{i-1}|<(|A_i|+1)(2l-1)$$
+    
+    Suponha que para algum $i\in\{2,...,l\}$ vale $A_i=\emptyset$. Então $|A_{i-1}| < (2l-1)$, $|A_{i-2}| < (2l-1)^2 + (2l-1)$, $|A_{i-3}| < (2l-1)^3 (2l-1)^2 + (2l-1)$, ..., e é fácil mostrar por indução que
+    $$|A_1|<\sum_{j=1}^{i-1}(2l-1)^j$$
 \end{proof}
 
 \begin{corolario}
