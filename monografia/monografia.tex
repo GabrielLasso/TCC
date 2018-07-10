@@ -21,6 +21,7 @@
 \date{}
 
 \newtheorem{conjectura}{Conjectura}
+\newtheorem{fato}{Fato}
 \newtheorem{lema}{Lema}
 \newtheorem{teorema}{Teorema}
 \newtheorem{corolario}{Corolário}[teorema]
@@ -134,6 +135,18 @@ Vamos mostrar uma demonstração dada por Yujia Pan em \cite{ES} e, para isso, p
 
 \subsection{Teorema de Sylvester-Gallai}
 Todo contunto finito de pontos tem todos os pontos colineares ou existe uma reta que passa por exatamente dois desses pontos.
+
+\section{Convenções}
+Nessa monografia, vamos usar as seguites notações:
+\begin{itemize}
+    \item $|X|$ é a cardinalidade do conjunto $X$.
+    \item $[n]=\{1,...,n\}$
+    \item $\overline{pq}$ é o segmento de reta com extremos em $p$ e $q$.
+    \item $\overrightarrow{pq}$ é o segmento de reta oritentado com origem em $p$ e extremidade em $q$.
+    \item $\overleftrightarrow{pq}$ é a reta que passa pelos pontos $p$ e $q$.
+    \item $\Delta(a,b,c)=\{\alpha a+\beta b+\gamma c|\alpha+\beta+\gamma=1, \alpha>0, \beta>0, \gamma>0\}$ é o triângulo aberto com vértices $a$, $b$ e $c$.
+    \item $\Delta[a,b,c]=\{\alpha a+\beta b+\gamma c|\alpha+\beta+\gamma=1, \alpha\geq0, \beta\geq0, \gamma\geq0\}$ é o triângulo aberto com vértices $a$, $b$ e $c$.
+\end{itemize}
 
 \chapter{Big-Line-Big-Clique conjecture}
 A conjectura seguinte foi proposta por \cite{visibilitygraph} em 2005, e ainda não se sabe se ela vale para valores a partir de  $k=6$ e $l=4$.
@@ -406,17 +419,133 @@ Vamos supor que um conjunto sulficientemente grande de pontos não tem nenhum pe
     Pelo teorema \ref{EScolinear}, $P$ possui algum conjunto de $k$ pontos em posição convexa. Seja $A_1$ um conjunto assim $k$-minimal.
     
     Vamos definir as camadas convexas $A_i$ a partir de $A_1$.
-    Para $i\in\{2,...,l-1\}$, seja $A_i$ os pontos de $P$ da fronteira de $(P\cap A_{i-1}) \setminus A_{i-1}$ e seja $A_l=(P\cap A_{i-1})\setminus A_{i-1}$.
+    Para $i\in[l-1]\setminus\{1\}$, seja $A_i$ os pontos de $P$ da fronteira de $(P\cap A_{i-1}) \setminus A_{i-1}$ e seja $A_l=(P\cap A_{i-1})\setminus A_{i-1}$.
 
-    Pelo lema \ref{convex} com $k=5$, para cada $i\in\{2,...,l\}$, quaisquer $2l-1$ pontos consecutivos em $A_i$ possuem $5$ pontos em posição estritamente convexa. Para que $P$ não tenha pentágonos vazios, o casco convexo desses $2l-1$ pontos deve conter um ponto de $A_{i-1}$.
+    Pelo lema \ref{convex} com $k=5$, para cada $i\in[l-1]\setminus\{1\}$, quaisquer $2l-1$ pontos consecutivos em $A_i$ possuem $5$ pontos em posição estritamente convexa. Para que $P$ não tenha pentágonos vazios, o casco convexo desses $2l-1$ pontos deve conter um ponto de $A_{i-1}$.
 
     Como $A_{i-1}$ contém $\floor{\frac{|A_{i-1}|}{2l-1}}$ conjuntos distintos de $2l-1$ pontos consecutivos, afirmo que
     $$|A_i|\geq\floor{\frac{|A_{i-1}|}{2l-1}}>\frac{|A_{i-1}|}{2l-1}-1$$
     E disso concluímos
     $$|A_{i-1}|<(|A_i|+1)(2l-1)$$
     
-    Suponha que para algum $i\in\{2,...,l\}$ vale $A_i=\emptyset$. Então $|A_{i-1}| < (2l-1)$, $|A_{i-2}| < (2l-1)^2 + (2l-1)$, $|A_{i-3}| < (2l-1)^3 (2l-1)^2 + (2l-1)$, ..., e é fácil mostrar por indução que
+    Suponha que para algum $i\in[l-1]$ vale $A_i=\emptyset$. Então $|A_{i-1}| < (2l-1)$, $|A_{i-2}| < (2l-1)^2 + (2l-1)$, $|A_{i-3}| < (2l-1)^3 (2l-1)^2 + (2l-1)$, ..., e é fácil mostrar por indução que
     $$|A_1|<\sum_{j=1}^{i-1}(2l-1)^j$$
+    Somando os elementos da PG, obtemos:
+    $$|A_1|=\frac{(2l-1)^i-(2l-1)}{2l-2}<\frac{(2l-1)^i-1}{2l-2}\leq\frac{(2l-1)^l-1}{2l-2}=k$$
+    O que é uma conrtadição. Logo $A_i\neq\emptyset, \forall i \in [l]$. Se $|A_i| < 3$, então $A_{i+1}=\emptyset$. Portanto $|A_i|\geq 3,\forall i \in [l-1]$.
+
+    Fixe $z\in A_l$. Para $i$ em $[l-2]$, considere os pontos de $A_i$ em sentido horário. Se $x$ e $y$ são dois pontos consecutivos nessa ordem, dizemos que o segmento orientado $\overrightarrow{xy}$ é um arco vazio se $\Delta (x,y,z)\cap A_{i+1}=\emptyset$, sendo $\Delta(x,y,z)$ o triângulo aberto com vértices $x$, $y$ e $z$.
+
+    Se $\overrightarrow{xy}$ é um arco vazio em $A_i$, $p$ e $q$ são consecutivos em $A_{i+1}$ em sentido horário e $\overrightarrow{pq}$ é o segmento orientado de $A_{i+1}$ que intercepta com $\Delta(x,y,z)$, então dizemos que $\overrightarrow{pq}$ é o arco seguinte a $\overrightarrow{xy}$.
+
+    \begin{tikzpicture}
+        \foreach \point in {(-1,2),(1,2),(0,0),(-1,1),(1,1)}{
+            \fill \point circle (2pt);
+        }
+
+        \draw[thin] (-3,0) -- (-1,2) -> (1,2) -- (3,0);
+        \draw[thin] (-2,0) -- (-1,1) -- (1,1) -- (2,0);
+        \draw[line width=0.25mm, densely dotted] (0,0) -- (-1,2) -- (1,2) -- (0,0);
+        \node(Ai) at (0,1.2) {$A_{i+1}$};
+        \node(Ai1) at (0,2.2) {$A_i$};
+        \node(x) at (-1.2,2) {$x$};
+        \node(y) at (1.2,2) {$y$};
+        \node(z) at (0.2,0) {$z$};
+    \end{tikzpicture}
+
+    \begin{fato}\label{fato1}
+        Se $\overrightarrow{xy}$ é um arco vazio e $\overrightarrow{pq}$ é o arco seguinte a $\overrightarrow{xy}$, então $\overrightarrow{pq}$ também é um arco vazio e $conv(\{x,y,p,q\})$ é um quadrilátero vazio.
+    \end{fato}
+    \begin{proof}
+        
+    \end{proof}
+
+    Seja $\overrightarrow{pq}$ o arco seguinte ao arco vazio $\overrightarrow{xy}$, então $\overrightarrow{pq}$ é:
+    \begin{itemize}
+        \item \textbf{alinhado à esqueda} se $p\in\Delta[x,y,z]$
+        \item \textbf{alinhado à direita} se $q\in\Delta[x,y,z]$
+        \item \textbf{alinhado duplamente} se é alinhado à esquerda e à direita.
+    \end{itemize}
+    \begin{tikzpicture}
+        \foreach \point in {(-1,2),(1,2),(0,0),(-0.5,1),(1,1)}{
+            \fill \point circle (2pt);
+        }
+
+        \draw[thin] (-3,0) -- (-1,2) -> (1,2) -- (3,0);
+        \draw[thin] (-1.5,0) -- (-0.5,1) -- (1,1) -- (2,0);
+        \draw[line width=0.25mm, densely dotted] (0,0) -- (-1,2) -- (1,2) -- (0,0);
+        \node(Ai) at (0,1.2) {$A_{i+1}$};
+        \node(Ai1) at (0,2.2) {$A_i$};
+        \node(x) at (-1.2,2) {$x$};
+        \node(y) at (1.2,2) {$y$};
+        \node(p) at (-0.7,1) {$p$};
+        \node(q) at (1.2,1) {$q$};
+        \node(z) at (0.2,0) {$z$};
+        \node(label) at (0,-1) {Alinhado à esquerda};
+    \end{tikzpicture}
+    \begin{tikzpicture}
+        \foreach \point in {(-1,2),(1,2),(0,0),(-1,1),(0.5,1)}{
+            \fill \point circle (2pt);
+        }
+
+        \draw[thin] (-3,0) -- (-1,2) -> (1,2) -- (3,0);
+        \draw[thin] (-2,0) -- (-1,1) -- (0.5,1) -- (1.5,0);
+        \draw[line width=0.25mm, densely dotted] (0,0) -- (-1,2) -- (1,2) -- (0,0);
+        \node(Ai) at (0,1.2) {$A_{i+1}$};
+        \node(Ai1) at (0,2.2) {$A_i$};
+        \node(x) at (-1.2,2) {$x$};
+        \node(y) at (1.2,2) {$y$};
+        \node(p) at (-1.2,1) {$p$};
+        \node(q) at (0.7,1) {$q$};
+        \node(z) at (0.2,0) {$z$};
+        \node(label) at (0,-1) {Alinhado à direita};
+    \end{tikzpicture}
+    \begin{tikzpicture}
+        \foreach \point in {(-1,2),(1,2),(0,0),(-0.5,1),(0.5,1)}{
+            \fill \point circle (2pt);
+        }
+
+        \draw[thin] (-3,0) -- (-1,2) -> (1,2) -- (3,0);
+        \draw[thin] (-1.5,0) -- (-0.5,1) -- (0.5,1) -- (1.5,0);
+        \draw[line width=0.25mm, densely dotted] (0,0) -- (-1,2) -- (1,2) -- (0,0);
+        \node(Ai) at (0,1.2) {$A_{i+1}$};
+        \node(Ai1) at (0,2.2) {$A_i$};
+        \node(x) at (-1.2,2) {$x$};
+        \node(y) at (1.2,2) {$y$};
+        \node(p) at (-0.7,1) {$p$};
+        \node(q) at (0.7,1) {$q$};
+        \node(z) at (0.2,0) {$z$};
+        \node(label) at (0,-1) {Duplamente alinhado};
+    \end{tikzpicture}
+    \begin{tikzpicture}
+        \foreach \point in {(-1,2),(1,2),(0,0),(-1,1),(1,1)}{
+            \fill \point circle (2pt);
+        }
+
+        \draw[thin] (-3,0) -- (-1,2) -> (1,2) -- (3,0);
+        \draw[thin] (-2,0) -- (-1,1) -- (1,1) -- (2,0);
+        \draw[line width=0.25mm, densely dotted] (0,0) -- (-1,2) -- (1,2) -- (0,0);
+        \node(Ai) at (0,1.2) {$A_{i+1}$};
+        \node(Ai1) at (0,2.2) {$A_i$};
+        \node(x) at (-1.2,2) {$x$};
+        \node(y) at (1.2,2) {$y$};
+        \node(p) at (-1.2,1) {$p$};
+        \node(q) at (1.2,1) {$q$};
+        \node(z) at (0.2,0) {$z$};
+        \node(label) at (0,-1) {Nenhum};
+    \end{tikzpicture}
+
+    \begin{fato}\label{fato2}
+    Se $\overrightarrow{pq}$ o arco seguinte ao arco vazio $\overrightarrow{xy}$, então $\overrightarrow{pq}$ é alinhado à esquerda ou alinhado à direita.
+    \end{fato}
+    \begin{proof}
+
+    \end{proof}
+    Suponha que $A_1$ não contenha arcos vazios. Então para dois pontos consecutivos $x$ e $y$ em $A_1$ temos pelo menos um ponto de $A_2$ em $\Delta(x,y,z)$. Como para todos pares de pontos concecutivos $x,y$ e $u,v$ em $A_1$, $\Delta(x,y,z)\cap\Delta(u,v,z)=\emptyset$, então $|A_2|\geq|A_1|$, o que contradiz a minimalidade de $A_1$.
+
+    Seja $\overrightarrow{x_1y_1}$ um arco vazio em $A_1$ e, para $i\in[l-2]$, seja $\overrightarrow{x_{i+1}y_{i+1}}$ o arco seguinte a $\overrightarrow{x_iy_i}$.
+
+    Pelo fato \ref{fato1}, $\overrightarrow{x_iy_i}$ é vazio.
 \end{proof}
 
 \begin{corolario}
@@ -458,7 +587,7 @@ Para $n=3$ e $n=4$ é fácil ver que $g(3)=3$ e $g(4)=5$. Harborth\cite{Harborth
 No entanto, Horton\cite{heptagon} mostrou uma constrção de conjuntos arbitrariamente grandes sem heptágonos vazios.
 
 \begin{teorema}
-Existem conjuntos arbitrariamente grandes sem heptágonos.
+    Existem conjuntos arbitrariamente grandes sem heptágonos.
 \end{teorema}
 \begin{proof}
 
