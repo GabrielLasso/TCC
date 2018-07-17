@@ -22,6 +22,8 @@
 
 \newtheorem{conjectura}{Conjectura}
 \newtheorem{fato}{Fato}
+\newtheorem{prop}{Proposição}
+\newtheorem{problem}{Problema}
 \newtheorem{lema}{Lema}
 \newtheorem{teorema}{Teorema}
 \newtheorem{corolario}{Corolário}[teorema]
@@ -82,10 +84,53 @@ Dizemos que um grafo de visibilidade é plano se suas arestas não se intercepta
 \section {Teoria de Ramsey}
 
 \subsection {Problema da festa}
+Um bom problema para ilustrara a teoria de Ramsey é o problema da festa:
+
+\begin{problem}
+    Qual a quantidade mínima de pessoas que tem que ter em uma festa para que três delas se conheçam ou três delas não se conheçam?
+\end{problem}
+
+Vamos resolver esse problema usando teoria dos grafos.
+
+Pessoas serão representadas por vértices e a relação entre elas por arestas coloridas. Se duas pessoas se conhecem, vamos colorir a aresta entre elas de azul, e se duas pessoas não se conhecem, vamos colorir a aresta entre elas de vermelho.
+
+Reformulando a pergunta em linguagem de teoria dos grafos, temos:
+
+\begin{problem}
+    Qual o menor $n$ tal que toda coloração de arestas de $K_n$ em $\{azul, vermelho\}$ possui uma 3-clique azul ou uma 3-clique vermelha (i.e. uma 3-clique com todas as arestas que ligam seus vértices azuis/vermelhas)?
+\end{problem}
+
+Vamos primeiro mostrar que $n=6$ resolve o problema e depois mostrar que $n=5$ não resolve, concluindo que $n=6$ é o mínimo.
+
+\begin{prop}
+Toda coloração das arestas de $K_6$ possui uma 3-clique azul ou uma 3-clique vermelha.
+\end{prop}
+\begin{proof}
+
+\end{proof}
+
+Para a seguinte coloração de $K_5$, não temos nenhuma 3-clique monocromática, logo $n=6$ é a solução desejada para o problema da festa.
+
+\begin{tikzpicture}
+    \node[fill, circle] (V1) at (0,1.5) {};
+    \node[fill, circle] (V2) at (1.43,0.46) {};
+    \node[fill, circle] (V3) at (0.88,-1.21) {};
+    \node[fill, circle] (V4) at (-0.88,-1.21) {};
+    \node[fill, circle] (V5) at (-1.43,0.46) {};
+
+    \draw[thin, color=blue] (V1) -- (V2) -- (V3) -- (V4) -- (V5) -- (V1);
+    \draw[thin, red] (V1) -- (V3) -- (V5) -- (V2) -- (V4) -- (V1);
+\end{tikzpicture}
 
 \subsection {Teorema de Ramsey}
+O teorema de Ramsey generaliza o resultado do problema da festa:
+
+\begin{teorema}
+    Para quaisquer $p,q\geq2$ inteiros existe um inteiro mínimo $N=r(p,q)$ tal que qualquer coloração de $K_N$ em duas cores possui uma $p$-clique monocromática ou uma $q$-clique monocromática.
+\end{teorema}
 
 \subsection {Generalizando para hipergrafos}
+Assim como um grafo, um \textbf{hipergrafo $k$-uniforme} é um par $(V,E)$ em que $V$ é o conjunto de \textbf{vértices} e $E$ é o conjunto de \textbf{arestas}, só que os elementos de $E$ são $k$-uplas de elementos de $V$.
 
 \section{Geometria combinatória}
 Vamos dar algumas definições a respeito de conjuntos de pontos no plano. Seja $P$ um conjunto finito de pontos no plano e $conv(P)$ o casco convexo de $P$. Dizemos que $P$ está em \textbf{posição geral} se não existirem três pontos colineares em $P$. 
@@ -141,6 +186,7 @@ Nessa monografia, vamos usar as seguites notações:
 \begin{itemize}
     \item $|X|$ é a cardinalidade do conjunto $X$.
     \item $[n]=\{1,...,n\}$
+    \item $A\setminus B = \{a\in A|a\notin B\}$
     \item $\overline{pq}$ é o segmento de reta com extremos em $p$ e $q$.
     \item $\overrightarrow{pq}$ é o segmento de reta oritentado com origem em $p$ e extremidade em $q$.
     \item $\overleftrightarrow{pq}$ é a reta que passa pelos pontos $p$ e $q$.
@@ -149,11 +195,11 @@ Nessa monografia, vamos usar as seguites notações:
 \end{itemize}
 
 \chapter{Big-Line-Big-Clique conjecture}
-A conjectura seguinte foi proposta por \cite{visibilitygraph} em 2005, e ainda não se sabe se ela vale para valores a partir de  $k=6$ e $l=4$.
+A conjectura seguinte foi proposta por \cite{visibilitygraph} em 2005:
 \begin{conjectura}\label{conj1}
     Dados dois inteiros $k,l\geq2$, existe um $n=n(k,l)$ tal que todo conjunto finito $P$ com pelo menos $n$ pontos no plano contém $k$ pontos visíveis (alternativamente, $\mathcal V(P)$ possui uma $k$-clique) ou $l$ pontos colineares.
 \end{conjectura}
-
+Embora seu enunciado seja simples, poucos resultados foram encontrados para ela, ainda estando em aberto para valores de $k$ e $l$ a partir de $6$ e $4$ respectivamente.
 
 Para nos habituarmos com o problema, vamos começar pelos casos mais básicos:
 
@@ -343,7 +389,7 @@ Para $k,l$ inteiros positivos, seja $q(k,l)$ o menor inteiro tal que todo conjun
 
 \end{proof}
 
-Com isso, podemos generalizar o teorema de Erd\H os-Szekeres como foi feito em \cite{pentagon}.
+Com isso, podemos generalizar o teorema de Erd\H os-Szekeres como foi feito por Abel et al.\cite{pentagon}.
 
 \begin{teorema}\label{EScolinear}
     Para todo inteiro $k$, todo conjunto com $ES(k)$ pontos contém $k$ pontos em posição convexa (não necessariamente estrita).
@@ -380,8 +426,11 @@ Com isso, podemos generalizar o teorema de Erd\H os-Szekeres como foi feito em \
 \end{proof}
 
 \subsection{Pentágonos vazios}
+
+Agora que sabemos como achar conjuntos em posição estritamente convexa, vamos mostrar o seguinte teorema de Abel et al\cite{pentagon}:
+
 \begin{teorema}
-    Para todo inteiro $l\geq 2$, todo conjunto finito com pelo menos $ES(\frac{}{})$ pontos no plano possui 
+    Para todo inteiro $l\geq 2$, todo conjunto finito com pelo menos $ES(\frac{(2l-1)^l-1}{2l-1})$ pontos no plano possui 
     \begin{itemize}
         \item $l$ pontos colineares, ou
         \item um pentágono vazio.
@@ -413,28 +462,30 @@ Vamos supor que um conjunto sulficientemente grande de pontos não tem nenhum pe
 
 \begin{proof}
     Seja $l\geq 3$ e $k=\frac{(2l-1)^l-1}{2l-1}$ e considere um conjunto $P$ com pelo menos $ES(k)$ pontos.
+
+    Suponha que $P$ não contém $l$ pontos colineares nem um pentágono vazio.
     
     Um conjunto $X\subset P$ em posição convexa com pelo menos $k$ pontos é dito $k$-minimal se não existir outro conjunto $Y\subset P$ em posição convexa com pelo menos $k$ pontos tal que $conv(Y)\subsetneq conv(X)$.
 
     Pelo teorema \ref{EScolinear}, $P$ possui algum conjunto de $k$ pontos em posição convexa. Seja $A_1$ um conjunto assim $k$-minimal.
     
     Vamos definir as camadas convexas $A_i$ a partir de $A_1$.
-    Para $i\in[l-1]\setminus\{1\}$, seja $A_i$ os pontos de $P$ da fronteira de $(P\cap A_{i-1}) \setminus A_{i-1}$ e seja $A_l=(P\cap A_{i-1})\setminus A_{i-1}$.
+    Para $i\in[l-1]\setminus\{1\}$, seja $A_i$ os pontos de $P$ da fronteira de $(P\cap conv(A_{i-1})) \setminus A_{i-1}$ e seja $A_l=(P\cap conv(A_{i-1}))\setminus A_{i-1}$.
 
     Pelo lema \ref{convex} com $k=5$, para cada $i\in[l-1]\setminus\{1\}$, quaisquer $2l-1$ pontos consecutivos em $A_i$ possuem $5$ pontos em posição estritamente convexa. Para que $P$ não tenha pentágonos vazios, o casco convexo desses $2l-1$ pontos deve conter um ponto de $A_{i-1}$.
 
-    Como $A_{i-1}$ contém $\floor{\frac{|A_{i-1}|}{2l-1}}$ conjuntos distintos de $2l-1$ pontos consecutivos, afirmo que
+    Como $A_{i-1}$ contém $\floor{\frac{|A_{i-1}|}{2l-1}}$ conjuntos distintos de $2l-1$ pontos consecutivos,
     $$|A_i|\geq\floor{\frac{|A_{i-1}|}{2l-1}}>\frac{|A_{i-1}|}{2l-1}-1$$
     E disso concluímos
     $$|A_{i-1}|<(|A_i|+1)(2l-1)$$
     
-    Suponha que para algum $i\in[l-1]$ vale $A_i=\emptyset$. Então $|A_{i-1}| < (2l-1)$, $|A_{i-2}| < (2l-1)^2 + (2l-1)$, $|A_{i-3}| < (2l-1)^3 (2l-1)^2 + (2l-1)$, ..., e é fácil mostrar por indução que
+    Suponha que para algum $i\in[l-1]$ vale $A_i=\emptyset$. Então $|A_{i-1}| < (2l-1)$, $|A_{i-2}| < (2l-1)^2 + (2l-1)$, $|A_{i-3}| < (2l-1)^3 + (2l-1)^2 + (2l-1)$, ..., e, por indução, 
     $$|A_1|<\sum_{j=1}^{i-1}(2l-1)^j$$
     Somando os elementos da PG, obtemos:
     $$|A_1|=\frac{(2l-1)^i-(2l-1)}{2l-2}<\frac{(2l-1)^i-1}{2l-2}\leq\frac{(2l-1)^l-1}{2l-2}=k$$
     O que é uma conrtadição. Logo $A_i\neq\emptyset, \forall i \in [l]$. Se $|A_i| < 3$, então $A_{i+1}=\emptyset$. Portanto $|A_i|\geq 3,\forall i \in [l-1]$.
 
-    Fixe $z\in A_l$. Para $i$ em $[l-2]$, considere os pontos de $A_i$ em sentido horário. Se $x$ e $y$ são dois pontos consecutivos nessa ordem, dizemos que o segmento orientado $\overrightarrow{xy}$ é um arco vazio se $\Delta (x,y,z)\cap A_{i+1}=\emptyset$, sendo $\Delta(x,y,z)$ o triângulo aberto com vértices $x$, $y$ e $z$.
+    Fixe $z\in A_l$. Para $i$ em $[l-2]$, considere os pontos de $A_i$ em sentido horário. Se $x$ e $y$ são dois pontos consecutivos nessa ordem, dizemos que o segmento orientado $\overrightarrow{xy}$ é um arco vazio se $\Delta (x,y,z)\cap A_{i+1}=\emptyset$.
 
     Se $\overrightarrow{xy}$ é um arco vazio em $A_i$, $p$ e $q$ são consecutivos em $A_{i+1}$ em sentido horário e $\overrightarrow{pq}$ é o segmento orientado de $A_{i+1}$ que intercepta com $\Delta(x,y,z)$, então dizemos que $\overrightarrow{pq}$ é o arco seguinte a $\overrightarrow{xy}$.
 
@@ -450,21 +501,28 @@ Vamos supor que um conjunto sulficientemente grande de pontos não tem nenhum pe
         \node(Ai1) at (0,2.2) {$A_i$};
         \node(x) at (-1.2,2) {$x$};
         \node(y) at (1.2,2) {$y$};
+        \node(p) at (-1.2,1) {$p$};
+        \node(q) at (1.2,1) {$q$};
         \node(z) at (0.2,0) {$z$};
     \end{tikzpicture}
 
     \begin{fato}\label{fato1}
-        Se $\overrightarrow{xy}$ é um arco vazio e $\overrightarrow{pq}$ é o arco seguinte a $\overrightarrow{xy}$, então $\overrightarrow{pq}$ também é um arco vazio e $conv(\{x,y,p,q\})$ é um quadrilátero vazio.
+        Se $\overrightarrow{xy}$ é um arco vazio de $A_i$ e $\overrightarrow{pq}$ é o arco seguinte a $\overrightarrow{xy}$, então $conv(\{x,y,p,q\})$ é um quadrilátero vazio e $\overrightarrow{pq}$ também é um arco vazio.
     \end{fato}
     \begin{proof}
-        
+        Seja $Q=\{x,y,p,q\}$. Como $p,q\in conv(A_i)$, $x$ e $y$ são vértices de $Q$ e como $\overrightarrow{xy}$ é um arco vazio $p$ e $q$ também são vértices de $Q$. Logo $Q$ é um quadrilátero. $Q$ é vazio pela definição das camadas convexas.
+
+        Suponha que $\overrightarrow{pq}$ não seja um arco vazio. Então existe algum ponto em $\Delta{p,q,z}\setminus\Delta(x,y,z)$. Seja $t$ um ponto desses mais próximo a $\overline{pq}$. Como $\{x,y,p,q\}$ é um quadrilátero vazio, então $\{x,y,p,q,t\}$ é um pentágono vazio, o que é uma contradição.
+
+        Logo $\overrightarrow{pq}$ é um arco vazio.
     \end{proof}
 
     Seja $\overrightarrow{pq}$ o arco seguinte ao arco vazio $\overrightarrow{xy}$, então $\overrightarrow{pq}$ é:
     \begin{itemize}
-        \item \textbf{alinhado à esqueda} se $p\in\Delta[x,y,z]$
-        \item \textbf{alinhado à direita} se $q\in\Delta[x,y,z]$
-        \item \textbf{alinhado duplamente} se é alinhado à esquerda e à direita.
+        \item \textbf{alinhado à esqueda} se $p\in\Delta[x,y,z]$ e $q\notin\Delta[x,y,z]$
+
+        \item \textbf{alinhado à direita} se $p\notin\Delta[x,y,z]$ e $q\in\Delta[x,y,z]$
+        \item \textbf{alinhado duplamente} se $p\in\Delta[x,y,z]$ e $q\in\Delta[x,y,z]$
     \end{itemize}
     \begin{tikzpicture}
         \foreach \point in {(-1,2),(1,2),(0,0),(-0.5,1),(1,1)}{
@@ -536,21 +594,61 @@ Vamos supor que um conjunto sulficientemente grande de pontos não tem nenhum pe
     \end{tikzpicture}
 
     \begin{fato}\label{fato2}
-    Se $\overrightarrow{pq}$ o arco seguinte ao arco vazio $\overrightarrow{xy}$, então $\overrightarrow{pq}$ é alinhado à esquerda ou alinhado à direita.
+    Se $\overrightarrow{pq}$ o arco seguinte ao arco vazio $\overrightarrow{xy}$, então $\overrightarrow{pq}$ é alinhado à esquerda ou alinhado à direita ou alinhado duplamente.
     \end{fato}
     \begin{proof}
+        Suponha que $\overrightarrow{pq}$ não seja nenhum desses casos.
 
+        Então seja $t$ o ponto em $D=P\cap(\Delta[p,q,z]\setminus\overline{pq})$ mais próximo a $\overline{pq}$. Tal ponto existe pois $z\in D$ e $D$ é finito.
+        
+        Como $\overrightarrow{xy}$ é um arco vazio e $\{x,y,p,q\}$ é um quadrilátero vazio, então $\{x,y,p,q,t\}$ é um pentágono vaio, o que é uma contradição.
+
+        Logo $\overrightarrow{pq}$ é alinhado à esquerda ou alinhado à direita ou alinhado duplamente
     \end{proof}
-    Suponha que $A_1$ não contenha arcos vazios. Então para dois pontos consecutivos $x$ e $y$ em $A_1$ temos pelo menos um ponto de $A_2$ em $\Delta(x,y,z)$. Como para todos pares de pontos concecutivos $x,y$ e $u,v$ em $A_1$, $\Delta(x,y,z)\cap\Delta(u,v,z)=\emptyset$, então $|A_2|\geq|A_1|$, o que contradiz a minimalidade de $A_1$.
+    Suponha que $A_1$ não contenha arcos vazios. Então para dois pontos consecutivos $x$ e $y$ em $A_1$ temos pelo menos um ponto de $A_2$ em $\Delta(x,y,z)$. Como para todos pares de pontos concecutivos $x,y$ e $u,v$ em $A_1$, $\Delta(x,y,z)\cap\Delta(u,v,z)=\emptyset$, teríamos $|A_2|\geq|A_1|$, o que contradiz a minimalidade de $A_1$.
 
-    Seja $\overrightarrow{x_1y_1}$ um arco vazio em $A_1$ e, para $i\in[l-2]$, seja $\overrightarrow{x_{i+1}y_{i+1}}$ o arco seguinte a $\overrightarrow{x_iy_i}$.
+    Seja $\overrightarrow{x_1y_1}$ um arco vazio em $A_1$ e, para $i\in[l-2]$, seja $\overrightarrow{x_{i+1}y_{i+1}}$ o arco seguinte a $\overrightarrow{x_iy_i}$. Pelo fato \ref{fato1}, $\overrightarrow{x_{i+1}y_{i+1}}$ é um arco vazio.
 
-    Pelo fato \ref{fato1}, $\overrightarrow{x_iy_i}$ é vazio.
+    Se todos os $\overrightarrow{x_iy_i}$ fossem duplamente alinhados, teríamos $\{x_1,x_2,...,x_{l-1},z\}$ colineares e $\{y_1,y_2,...,y_{l-1},z\}$ colineares e, pelo fato \ref{fato2}, $\{x_1,x_2,...,x_{l-1},x_l,z\}$ ou $\{y_1,y_2,...,y_{l-1},y_l,z\}$ seriam colineares, o que é uma contradição.
+
+    Então algum $\overrightarrow{x_iy_i}$ não á duplamente alinhado. Fixe o menor $i\in[l-2]\setminus\{1\}$ que isso acontece. Pelo fato \ref{fato2}, $\overrightarrow{x_iy_i}$ é alinhado à esquerda ou à direita. Sem perda de generalidade, suponha que é alinhado à esquerda. Existe algum $j\in\{i+1,...l-1\}$ tal que $\overrightarrow{x_jy_j}$ não é alinhado à esquerda, pois caso contrário $\{x_1,x_2,...,x_l,z\}$ seriam colineares. Fixe o menor $j\in\{i+1,...,l-1\}$ que isso acontece.
+
+    Temos que $\{x_{j-2},y_{j-2},x_{j-1},y_{j-1},y_j\}$ estão em posição estritamente convexa. Portanto $P$ contém um pentágono vazio.
+
+    \begin{tikzpicture}
+        \foreach \point in {(-1,2),(1,2),(0,0),(0.66666,1),(-0.75,1.5),(1,1.5)}{
+            \fill \point circle (2pt);
+        }
+        \draw[thin] (-3,0) -- (-1,2) -- (1,2) -- (3,0);
+        \draw[thin] (-2.25,0) -- (-0.75,1.5) -- (1,1.5) -- (2.5,0);
+        \draw[thin] (-0.5,1) -- (0.66666,1) -- (1.5,0);
+        \draw[dotted] (-0.8,1) -- (-0.5,1);
+        \draw[dotted] (0,0) -- (-1,2);
+        \draw[dotted] (0,0) -- (1,2);
+        \draw[dotted] (0,0) -- (1,1.5);
+        \node(Aj2) at (0,1.2) {$A_{j-2}$};
+        \node(Aj1) at (0,1.7) {$A_{j-1}$};
+        \node(Aj) at (0,2.2) {$A_j$};
+        \node(xj2) at (-1.5,2) {$x_{j-2}$};
+        \node(yj2) at (1.5,2) {$y_{j-2}$};
+        \node(xj1) at (-1.25,1.5) {$x_{j-1}$};
+        \node(yj1) at (1.5,1.5) {$y_{j-1}$};
+        \node(yj) at (1,1) {$y_j$};
+        \node(z) at (0.2,0) {$z$};
+        \draw[opacity=0.5,fill=gray] (1,2) -- (-1,2) -- (-0.75,1.5) -- (0.66666,1) -- (1,1.5);
+    \end{tikzpicture}
 \end{proof}
 
+Como a melhor cota superior para a ordem de crescimento de $ES(k)$ conhecida é exponencial em $k$\cite{ESbound}, esse teorema nos garante a existência de pentágonos vazios em conjuntos de tamanho muito grandes por conter um exponencial duplo. 
+
+De fato, em 2012 Brát et al\cite{pentagon2} mostraram que o resultado vale para $328l^2$ pontos construindo mais de $l$ camadas convexas com alguma delas com arco vazio e usou o mesmo argumento do teorema a cima.
+
 \begin{corolario}
-    A conjectura \ref{conj1} é verdadeira para $k=5$.
+    A conjectura \ref{conj1} é verdadeira para $k=5$ com $n(5,l)=\Theta(l^2)$.
 \end{corolario}
+\begin{proof}
+    O resultado de Brát et al\cite{pentagon2} garante que $n(5,l)=O(l^2)$. Para ver que $n(5,l)=\Omega(l^2)$ basta ver que uma grade $(l-1)$x$(l-1)$ contém $(l-1)^2$ pontos e não contém pentágonos vazios nem $l$ pontos colineares.
+\end{proof}
 
 \section{Para conjuntos infinitos de pontos}
 Em 2010\cite{infinity}, Atila Pór e David Wood mostraram que a conjectura \ref{conj1} não vale para conjuntos infinitos de pontos com a seguinte construção:
