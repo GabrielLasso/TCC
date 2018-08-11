@@ -46,6 +46,19 @@ Todos esses conceitos serão definidos com mais formalidade mais pra frente. O p
 No caítulo 2 vamos definir alguns conceitos que serão base para os demais, assim como demonstrar algumas propriedades chaves desses conceitos. No capítulo 3 vamos mostrar os resultados conhecidos sobre a conjectura big-line-big-clique, mostrar algumas dificuldades encontradas na tentativa de resolver esse problema e discutir alguns fatos sobre ele. No capítulo 4 vamos focar no problema dos bloqueadores de visibilidade, mostrando cotas superiores e inferiores conhecidas e discutindo algumas coisas em aberto que as pessoas acreditam que sejam verade.
 
 \chapter{Noções preliminares}
+\section{Convenções}
+Vamos começar definindo algumas convenções de notação:
+\begin{itemize}
+    \item $|X|$ é a cardinalidade do conjunto $X$.
+    \item $[n]=\{1,...,n\}$
+    \item $A\setminus B = \{a\in A|a\notin B\}$
+    \item $\overline{pq}$ é o segmento de reta com extremos em $p$ e $q$.
+    \item $\overrightarrow{pq}$ é o segmento de reta oritentado com origem em $p$ e extremidade em $q$.
+    \item $\overleftrightarrow{pq}$ é a reta que passa pelos pontos $p$ e $q$.
+    \item $\Delta(a,b,c)=\{\alpha a+\beta b+\gamma c|\alpha+\beta+\gamma=1, \alpha>0, \beta>0, \gamma>0\}$ é o triângulo aberto com vértices $a$, $b$ e $c$.
+    \item $\Delta[a,b,c]=\{\alpha a+\beta b+\gamma c|\alpha+\beta+\gamma=1, \alpha\geq0, \beta\geq0, \gamma\geq0\}$ é o triângulo fechado com vértices $a$, $b$ e $c$.
+\end{itemize}
+
 \section{Grafos}
 Um grafo é um par $G=(V,E)$ em que $V$ é um conjunto enumerável (geralmente finito) e $E$ é um conjunto de pares não ordenados de elementos de $V$. Os elementos de $V$ são chamados \textbf{vértices}, e os elementos de $E$ são chamados \textbf{arestas}.
 
@@ -97,7 +110,7 @@ Pessoas serão representadas por vértices e a relação entre elas por arestas 
 Reformulando a pergunta em linguagem de teoria dos grafos, temos:
 
 \begin{problem}
-    Qual o menor $n$ tal que toda coloração de arestas de $K_n$ em $\{azul, vermelho\}$ possui uma 3-clique azul ou uma 3-clique vermelha (i.e. uma 3-clique com todas as arestas que ligam seus vértices azuis/vermelhas)?
+    Qual o menor $n$ tal que toda coloração de arestas\footnote{Uma coloração de arestas de um grafo $G$ é uma função de $E(G)$ em um conjunto de cores, digamos $\{Azul, Vermelho\}$} de $K_n$ em $\{azul, vermelho\}$ possui uma 3-clique azul ou uma 3-clique vermelha (i.e. uma 3-clique com todas as arestas que ligam seus vértices azuis/vermelhas)?
 \end{problem}
 
 Vamos primeiro mostrar que $n=6$ resolve o problema e depois mostrar que $n=5$ não resolve, concluindo que $n=6$ é o mínimo.
@@ -106,7 +119,9 @@ Vamos primeiro mostrar que $n=6$ resolve o problema e depois mostrar que $n=5$ n
 Toda coloração das arestas de $K_6$ possui uma 3-clique azul ou uma 3-clique vermelha.
 \end{prop}
 \begin{proof}
+    Seja $x$ um vértice de $K_6$. Existem $5$ arestas com extremidade em $x$. Por contagem, pelo menos $3$ dessas arestas são da mesma cor, digamos, vermelhas. Sejam $a,b,c$ vértices tais que $xa,xb,xc$ são arestas coloridas de vermelho.
 
+    Vamos olhar para as arestas $ab,bc,ca$. Se alguma delas for vermelha, temos um triângulo vermelho. Se nenhuma delas for vermelha, temos um triângulo azul. Isso prova que $n=6$ é sulficiente para resulver o problema.
 \end{proof}
 
 Para a seguinte coloração de $K_5$, não temos nenhuma 3-clique monocromática, logo $n=6$ é a solução desejada para o problema da festa.
@@ -126,11 +141,23 @@ Para a seguinte coloração de $K_5$, não temos nenhuma 3-clique monocromática
 O teorema de Ramsey generaliza o resultado do problema da festa:
 
 \begin{teorema}
-    Para quaisquer $p,q\geq2$ inteiros existe um inteiro mínimo $N=r(p,q)$ tal que qualquer coloração de $K_N$ em duas cores possui uma $p$-clique monocromática ou uma $q$-clique monocromática.
+    Para quaisquer $p,q\geq2$ inteiros existe um inteiro mínimo $N=r(p,q)$ tal que qualquer coloração de $K_N$ em duas cores possui uma $p$-clique azul ou uma $q$-clique vermelha.
 \end{teorema}
+\begin{proof}
+
+\end{proof}
 
 \subsection {Generalizando para hipergrafos}
-Assim como um grafo, um \textbf{hipergrafo $k$-uniforme} é um par $(V,E)$ em que $V$ é o conjunto de \textbf{vértices} e $E$ é o conjunto de \textbf{arestas}, só que os elementos de $E$ são $k$-uplas de elementos de $V$.
+Assim como um grafo, um \textbf{hipergrafo $k$-uniforme} é um par $(V,E)$ em que $V$ é o conjunto de \textbf{vértices} e $E$ é o conjunto de \textbf{arestas}, só que os elementos de $E$ são $k$-uplas não ordenadas de elementos de $V$.
+
+O teorema de Ramsey pode ser generalizado da seguinte forma:
+
+\begin{teorema}
+    Para quaisquer $k,p,q\geq 2$ inteiro existe um inteiro mínimo $N=r^k(p,q)$ tal que qualquer coloração dos subconjuntos de tamaho $k$ de $\{1,...,N\}$ possui $p$ subconjuntos de tamanho $k$ azuis ou $q$ subconjuntos de tamanho $k$ vermelhos.
+\end{teorema}
+\begin{proof}
+
+\end{proof}
 
 \section{Geometria combinatória}
 Vamos dar algumas definições a respeito de conjuntos de pontos no plano. Seja $P$ um conjunto finito de pontos no plano e $conv(P)$ o casco convexo de $P$. Dizemos que $P$ está em \textbf{posição geral} se não existirem três pontos colineares em $P$. 
@@ -155,7 +182,7 @@ Um resultado clássico da teoria de Ramsey na geometria combinatória é o segui
     Dado um inteiro positivo $k$, existe um inteiro $ES(k)$ tal que todo conjunto com pelo menos $ES(k)$ pontos em posição geral contém $k$ pontos em posição estritamente convexa.
 \end{teorema}
 
-Vamos mostrar uma demonstração dada por Yujia Pan em \cite{ES} e, para isso, primeiro vamos resolver um caso particular com $k=5$:
+Vamos mostrar uma demonstração dada por Yujia Pan\cite{ES} e, para isso, primeiro vamos resolver um caso particular com $k=5$:
 \begin{lema}
     Todo conjunto com $5$ pontos em posição geral contém quatro pontos em posição estritamente convexa.
 \end{lema}
@@ -179,20 +206,13 @@ Vamos mostrar uma demonstração dada por Yujia Pan em \cite{ES} e, para isso, p
 \end{proof}
 
 \subsection{Teorema de Sylvester-Gallai}
-Todo contunto finito de pontos tem todos os pontos colineares ou existe uma reta que passa por exatamente dois desses pontos.
+Outro resultado interessante é o teorema de Sylvester-Gallai.
+\begin{teorema}   
+    Todo contunto finito de pontos tem todos os pontos colineares ou existe uma reta que passa por exatamente dois desses pontos.
+\end{teorema}
+\begin{proof}
 
-\section{Convenções}
-Nessa monografia, vamos usar as seguites notações:
-\begin{itemize}
-    \item $|X|$ é a cardinalidade do conjunto $X$.
-    \item $[n]=\{1,...,n\}$
-    \item $A\setminus B = \{a\in A|a\notin B\}$
-    \item $\overline{pq}$ é o segmento de reta com extremos em $p$ e $q$.
-    \item $\overrightarrow{pq}$ é o segmento de reta oritentado com origem em $p$ e extremidade em $q$.
-    \item $\overleftrightarrow{pq}$ é a reta que passa pelos pontos $p$ e $q$.
-    \item $\Delta(a,b,c)=\{\alpha a+\beta b+\gamma c|\alpha+\beta+\gamma=1, \alpha>0, \beta>0, \gamma>0\}$ é o triângulo aberto com vértices $a$, $b$ e $c$.
-    \item $\Delta[a,b,c]=\{\alpha a+\beta b+\gamma c|\alpha+\beta+\gamma=1, \alpha\geq0, \beta\geq0, \gamma\geq0\}$ é o triângulo aberto com vértices $a$, $b$ e $c$.
-\end{itemize}
+\end{proof}
 
 \chapter{Big-Line-Big-Clique conjecture}
 A conjectura seguinte foi proposta por Jan Kára et al em 2005\cite{visibilitygraph}:
