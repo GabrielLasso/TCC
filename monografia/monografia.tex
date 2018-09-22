@@ -52,6 +52,7 @@ Vamos começar definindo algumas convenções de notação:
     \item $|X|$ é a cardinalidade do conjunto $X$.
     \item $[n]=\{1,...,n\}$
     \item $A\setminus B = \{a\in A|a\notin B\}$
+    \item Um $k$-conjunto é um conjunto de cardinalidade $k$ (e um $k$-subconjunto é um subconjuto de cardinalidade $k$)
     \item $\overline{pq}$ é o segmento de reta com extremos em $p$ e $q$.
     \item $\overrightarrow{pq}$ é o segmento de reta orientado com origem em $p$ e extremidade em $q$.
     \item $\overleftrightarrow{pq}$ é a reta que passa pelos pontos $p$ e $q$.
@@ -183,15 +184,47 @@ O teorema de Ramsey generaliza o resultado do problema da festa:
 \end{proof}
 
 \subsection {Generalizando para hipergrafos}
-Assim como um grafo, um \textbf{hipergrafo $k$-uniforme} é um par $(V,E)$ em que $V$ é o conjunto de \textbf{vértices} e $E$ é o conjunto de \textbf{arestas}, só que os elementos de $E$ são $k$-uplas não ordenadas de elementos de $V$.
+Assim como um grafo, um \textbf{hipergrafo $k$-uniforme} é um par $(V,E)$ em que $V$ é o conjunto de \textbf{vértices} e $E$ é o conjunto de \textbf{arestas}, só que os elementos de $E$ são $k$-subconjuntos de $V$.
 
 O teorema de Ramsey pode ser generalizado da seguinte forma:
 
 \begin{teorema}
-    Para quaisquer $k,p,q\geq 2$ inteiro existe um inteiro $N=R^k(p,q)$ tal que qualquer coloração dos subconjuntos de tamaho $k$ de $\{1,...,N\}$ possui $p$ subconjuntos de tamanho $k$ azuis ou $q$ subconjuntos de tamanho $k$ vermelhos.
+    Para quaisquer $k>0$, $p,q\geq k$ inteiros, existe um inteiro $N=R^k(p,q)$ tal que para qualquer coloração das $k$-arestas do hipergrafo $k$-uniforme completo de $N$ vértices existe um conjunto de $p$ vérices tal que todas as $k$-arestas entre eles são azuis ou um conjunto de $q$ vértices tal que todas as $k$-arestas entre eles são vermelhas (alternativamente, para qualquer coloração dos $k$-subconjuntos de $\{1,...,N\}$ existe um $p$-subconjunto cujos $k$-subconjuntos são azuis ou um $q$-subconjunto cujos $k$-subconjuntos são vermelhos).
 \end{teorema}
 \begin{proof}
+    Vamos mostrar por indução em $p$, $q$ e $k$.
+
+    Primeiramente, se $k=1$, é fácil ver que $R^k(p,q)=max\{p,q\}$, já que as colorações são de vértices individuais.
+
+    Agora, se $p=k$, uma coloração que não contém um conjuntp de $p=k$ vértices com as arestas azuis tem que conter todas as arestas vermelhas. Similarmente à base da indução no caso de grafos, temos que $R^k(k,q)=q$ e, por simetria, $R^k(p,k)=p$.
+
+    Assim podemos colocar nossas hipóteses de indução. Sejam $p,q,k$ como no enunciado do teorema. Suponha que existam, para qualquer $x,y$:
+    \begin{itemize}
+        \item $R^{k-1}(x,y)$
+        \item $R^k(p-1,y)$
+        \item $R^k(x,q-1)$
+    \end{itemize}
+    E vamos mostrar que existe $R^k(p,q)$.
+
+    Seja $N=R^{k-1}(R^k(p-1,q),R^k(p,q-1))+1$. Considere $K^N_k$ o hipergrafo $k$-uniforme completo de $N$ vértices e uma coloração $\chi$ de suas arestas.
+
+    Escolha um vértice qualquer $x$ e seja $S$ a coleção de todas as $(k-1)$-arestas que não contém $x$. $S$ define um hipergrafo $(k-1)-uniforme$ completo de $N-1$ vértices e possui uma coloração induzida por $\chi$ dada por $\chi'(e)=\chi(e\cup\{x\})$ para toda aresta $e$ de $S$. 
+    
+    Pela escolha de $N$, podemos aplicar nossa hipótese de indução em $S$ e colcluir que vale:
+    \begin{itemize}
+        \item Ou $S$ tem um conjunto $A$ de $R^k(p,q-1)$ vértices tal que toda (k-1) aresta de $S$ em $A$ é azul (para $\chi'$);
+        \item Ou $S$ tem um conjunto $V$ de $R^k(p-1,q)$ vértices tal que toda (k-1) aresta de $S$ em $V$ é vermelha (para $\chi'$).
+    \end{itemize}
+    Sem perda de generalidade, suponha que o primeiro caso que vale.
+
+    Então, pela hipótese de indução, vale uma das seguintes afirmações:
+    \begin{itemize}
+        \item A tem um $(p-1)$-subconjunto $T$ tal que toda $k$-aresta em $T$ é azul (para $\chi$)
+        \item A tem um $q$-subconjunto $T$ tal que toda $k$-aresta em $T$ é vermelha (para $\chi$)
+    \end{itemize}
 \end{proof}
+
+No segundo caso o teorema está provado. Olhando para o primeiro caso, considere $T'=T\cup\{x\}$. Se uma aresta $a$ em $T'$ contém $x$, ela é azul por que $a\setminus x$ foi pintado de azul em $S$ por $\chi'$. Se uma aresta e $T'$ não contém $x$, então ela também está em $T$ e, por hipótese, é azul. Assim $T'$ é um conjunto de $p$ vértices com todas as arestas nele azuis.
 
 \section{Geometria combinatória}
 Vamos dar algumas definições a respeito de conjuntos de pontos no plano. Seja $P$ um conjunto finito de pontos no plano e $conv(P)$ o casco convexo de $P$. Dizemos que $P$ está em \textbf{posição geral} se não existirem três pontos colineares em $P$. 
