@@ -758,11 +758,18 @@ Em 2010\cite{infinity}, Atila Pór e David Wood mostraram que a conjectura \ref{
 
 \end{proof}
 
-\section{Dificuldades encontradas}
-\subsection{The orchard problem e o grafo de Turán}
-Problema citado em \cite{visblock}, solução do orchard problem tem menos arestas do que o grafo de Turán para $k\geq 5$
+\section{Conclusão}
+Embora essa seja uma conjectura com o enunciado relativamente simples, ela é recente e ainda está longe de ser provada. Nos primeiros anos após ser proposta ela recebeu uma aenção considerável entre vários pesquisadores da área, mas não conheço nenhuma publicação sobre ela de depois de 2014, o que mostra a dificuldade de se obter qualquer avanço nela atualmente.
 
-\subsection{Conjuntos de pontos sem heptágonos vazios}
+Com tamanha dificuldade, Jan Kara propôs o seguinte enfraquecimento da conjectura em uma conversa com Atilla Pór e David R. Wood em 2005, mas também não houveram avanços.
+\begin{conjectura}
+    Dados $k,l\geq 2$, existe um $n=n(k,l)$ tal que todo conjunto finito $P$ com pelo menos $n$ pontos com cada ponto colorido em alguma cor dentr $k-1$ cores ou tem $l$ pontos colineares ou tem um par de pontos da mesma cor visíveis entre si ($\mathcal V(P)$ tem número cromático pelo menos $k$).
+\end{conjectura}
+
+Vamos falar de alguns resultados que dificultaram tentativas mais diretas de provar a conjectura e depois vamos falar de algumas áreas que surgiram a partir de outras tentativas de mostrá-la.
+\subsection{Dificuldades encontradas}
+
+\subsubsection{Conjuntos de pontos sem heptágonos vazios}
 Dado que o teorema de Erd\H os-Szekeres vale, Erd\H os colocou o problema de determinar se para um dado $n$ existe um $g(n)$ tal que todo conjunto com $g(n)$ pontos em posição geral contém um $n$-ágono vazio.
 
 Se essa questão fosse respondida afirmativamente, a conjectura \ref{conj1} sairia como corolário.
@@ -771,12 +778,15 @@ Para $n=3$ e $n=4$ é fácil ver que $g(3)=3$ e $g(4)=5$. Harborth\cite{Harborth
 
 No entanto, Horton\cite{heptagon} mostrou uma constrção de conjuntos arbitrariamente grandes sem heptágonos vazios.
 
-\begin{teorema}
-    Existem conjuntos arbitrariamente grandes sem heptágonos.
-\end{teorema}
-\begin{proof}
+\subsubsection{The orchard problem e o grafo de Turán}
+Turán provou que todo grafo com $n$ vértices e mais arestas que o grafo de Turán $T_{n,k}$\footnote{$T_{n,k}$ é o grafo com $n$ vértices, $k$ cores, dois vértices adjacentes se e somente se tem cores diferentes e a diferença da quantidade de vértices de cada cor no máximo $1$.} tem um subgrafo $K_{n+1}$, então se mostrássemos que todo grafo de visibilidade sem retas com muitos pontos possui muitas arestas conseguiríamos provar a conjectura.
 
-\end{proof}
+Mas, tentando resolver o \textit{orchard problem}\footnote{Problema do pomar em tradução livre. Dados $n,k$ inteiros, queremos achar o conjunto de $n$ pontos com o máximo de retas que contém $k$ pontos em cada uma delas.}, Burr et al. e Füredi e Palásti construiram conjuntos de pontos sem quatro pontos colineares cujo grafo de visibilidade tem menos arestas que o grafo de Turán.
+
+\subsection {Novas direções}
+
+Em 2008, enquato tentava provar a conjectura \ref{conj1}, Jiří Matoušek se perguntou quantos pontos são necessário para bloquear a visibilidade de um conjunto de pontos dado. Os resultados obtidos por ele serão vistos no próximo capítulo, mas a partir disso surgiram várias outras questões sobre visibilidade de pontos e bloqueadores de visibilidade.
+
 \chapter{Bloqueadores de visibilidade}
 
 \section{Ordem de crescimento de $b(n)$}
