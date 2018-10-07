@@ -20,3 +20,6 @@
 *-blx.bib
 *.run.xml
 
+*.brf
+*.idx
+
