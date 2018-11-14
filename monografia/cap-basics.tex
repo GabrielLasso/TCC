@@ -9,8 +9,8 @@ Vamos começar definindo algumas convenções de notação:
     \item $\overline{pq}$ é o segmento de reta com extremos em $p$ e $q$.
     \item $\overrightarrow{pq}$ é o segmento de reta orientado com origem em $p$ e extremidade em $q$.
     \item $\overleftrightarrow{pq}$ é a reta que passa pelos pontos $p$ e $q$.
-    \item $\Delta(a,b,c)=\{\alpha a+\beta b+\gamma c|\alpha+\beta+\gamma=1, \alpha>0, \beta>0, \gamma>0\}$ é o triângulo aberto com vértices $a$, $b$ e $c$.
-    \item $\Delta[a,b,c]=\{\alpha a+\beta b+\gamma c|\alpha+\beta+\gamma=1, \alpha\geq0, \beta\geq0, \gamma\geq0\}$ é o triângulo fechado com vértices $a$, $b$ e $c$.
+    \item $\Delta(a,b,c)=\{\alpha a+\beta b+\gamma c|\alpha+\beta+\gamma=1, \alpha>0, \beta>0, \gamma>0\}$ é o triângulo aberto com vértices $a$, $b$ e $c$ se $a$, $b$, $c$ não são colineares.
+    \item $\Delta[a,b,c]=\{\alpha a+\beta b+\gamma c|\alpha+\beta+\gamma=1, \alpha\geq0, \beta\geq0, \gamma\geq0\}$ é o triângulo fechado com vértices $a$, $b$ e $c$ se $a$, $b$, $c$ não são colineares.
 \end{itemize}
 
 \section{Grafos}
@@ -40,12 +40,12 @@ O grafo de visibilidade de um conjunto $P$ de pontos no plano é o grafo constru
 Dizemos que um grafo de visibilidade é plano se suas arestas não se interceptam.
 
 \begin{teorema}[\cite{visibility}]\label{planork4}
-    Todo grafo de visibilidade finito é planar ou contém uma cópia de $K_4$.
+    Todo grafo de visibilidade finito é plano ou contém uma cópia de $K_4$.
 \end{teorema}
 \begin{proof}
-    Seja $G=\mathcal V(P)$ um grafo de visibilidade finito. Suponha que $G$ não seja planar. Vamos mostrar que $G$ contém $K_4$.
+    Seja $G=\mathcal V(P)$ um grafo de visibilidade finito. Suponha que $G$ não seja plano. Vamos mostrar que $G$ contém $K_4$.
 
-    Como $G$ não é planar, existe alguma aresta $\overline{ab}$ que intercepta com outras (pelo menos uma outra). A reta $\overleftrightarrow{ab}$ separa o plano em dois semiplanos $D$ e $E$. Seja $p$ o ponto de $D$ mais próximo do segmento $\overline{ab}$ e $q$ o ponto de $E$ mais próximo do segmento $\overline{ab}$ tal que $\overline{pq}$ intercepta $\overline{ab}$. Pela escolha de $p$ e $q$, os pontos $a$, $b$, $p$ e $q$ são visíveis, logo $G[\{a,b,p,q\}]$ é um $K_4$.
+    Como $G$ não é plano, existe alguma aresta $\overline{ab}$ que intercepta com outras (pelo menos uma outra). A reta $\overleftrightarrow{ab}$ separa o plano em dois semiplanos $D$ e $E$. Seja $p$ o ponto de $D$ mais próximo do segmento $\overline{ab}$ e $q$ o ponto de $E$ mais próximo do segmento $\overline{ab}$ tal que $\overline{pq}$ intercepta $\overline{ab}$. Pela escolha de $p$ e $q$, os pontos $a$, $b$, $p$ e $q$ são visíveis, logo $G[\{a,b,p,q\}]$ é um $K_4$.
     \begin{center}
         \begin{tikzpicture}
             \fill (0,0.2) circle (1pt);
@@ -66,7 +66,7 @@ Dizemos que um grafo de visibilidade é plano se suas arestas não se intercepta
 \section {Teoria de Ramsey}
 
 \subsection {Problema da festa}
-Um bom problema para ilustrara a teoria de Ramsey é o problema da festa já mencionado:
+Um bom problema para ilustrar a teoria de Ramsey é o problema da festa já mencionado:
 
 \begin{problem}
     Qual a quantidade mínima de pessoas que deve haver em uma festa para que três delas se conheçam ou três delas não se conheçam?
@@ -90,7 +90,7 @@ Vamos primeiro mostrar que $n=6$ resolve o problema e depois mostrar que $n=5$ n
 \begin{proof}
     Seja $x$ um vértice de $K_6$. Existem $5$ arestas com extremidade em $x$. Por contagem, pelo menos $3$ dessas arestas são da mesma cor, digamos, vermelhas. Sejam $a,b,c$ vértices tais que $xa,xb,xc$ são arestas coloridas de vermelho.
 
-    Vamos olhar para as arestas $ab,bc,ca$. Se alguma delas for vermelha, temos um triângulo vermelho. Se nenhuma delas for vermelha, temos um triângulo azul. Isso prova que $n=6$ é sulficiente para resulver o problema.
+    Vamos olhar para as arestas $ab,bc,ca$. Se alguma delas for vermelha, temos um triângulo vermelho. Se nenhuma delas for vermelha, temos um triângulo azul. Isso prova que $n=6$ é sulficiente para resolver o problema.
 \end{proof}
 
 Para a seguinte coloração de $K_5$, não temos nenhuma 3-clique monocromática, logo $n=6$ é a solução desejada para o problema da festa.
@@ -103,7 +103,7 @@ Para a seguinte coloração de $K_5$, não temos nenhuma 3-clique monocromática
         \node[fill, circle] (V5) at (-1.43,0.46) {};
 
         \draw[thin, color=blue] (V1) -- (V2) -- (V3) -- (V4) -- (V5) -- (V1);
-        \draw[thin, red] (V1) -- (V3) -- (V5) -- (V2) -- (V4) -- (V1);
+        \draw[densely dotted, red] (V1) -- (V3) -- (V5) -- (V2) -- (V4) -- (V1);
     \end{tikzpicture}
 \end{center}
 
@@ -120,7 +120,7 @@ O teorema de Ramsey generaliza o resultado do problema da festa:
 
     Para mostrar que $R(p,q)$ existe para qualquer $p$ e $q$, vamos mostrar um limitante superior.
 
-    Sejam $p,q\geq3$ e suponha que exista $R(p,q-1)$ e $R(p,q-1)$. Vamos mostrar que $R(p,q)\leq R(p,q-1)+R(p-1,q)$.
+    Sejam $p,q\geq3$. Tome, como hipótese de indução, que $R(p,q-1)$ e $R(p,q-1)$ existam. Vamos mostrar que $R(p,q)\leq R(p,q-1)+R(p-1,q)$.
 
     Seja $N=R(p,q-1)+R(p-1,q)$ e $x$ um vértice de $K_N$. Considere os conjuntos dos vértices que são conectados a $x$ por uma aresta azul e dos que são conectados a $x$ por uma aresta vermelha. Chame-os de $A$ e $V$.
 
@@ -149,19 +149,19 @@ O teorema de Ramsey pode ser generalizado da seguinte forma:
 
     Primeiramente, se $k=1$, é fácil ver que $R^k(p,q)=max\{p,q\}$, já que as colorações são de vértices individuais.
 
-    Agora, se $p=k$, uma coloração que não contém um conjuntp de $p=k$ vértices com as arestas azuis tem que conter todas as arestas vermelhas. Similarmente à base da indução no caso de grafos, temos que $R^k(k,q)=q$ e, por simetria, $R^k(p,k)=p$.
+    Agora, se $p=k$, uma coloração que não contém um conjunto de $p=k$ vértices com as arestas azuis tem que conter todas as arestas vermelhas. Similarmente à base da indução no caso de grafos, temos que $R^k(k,q)=q$ e, por simetria, $R^k(p,k)=p$.
 
-    Assim podemos colocar nossas hipóteses de indução. Sejam $p,q,k$ como no enunciado do teorema. Suponha que existam, para qualquer $x,y$:
+    Sejam $p,q,k$ como no enunciado do teorema. Pela hipótese de indução, para qualquer $x,y$ existem:
     \begin{itemize}
         \item $R^{k-1}(x,y)$
         \item $R^k(p-1,y)$
         \item $R^k(x,q-1)$
     \end{itemize}
-    E vamos mostrar que existe $R^k(p,q)$.
+    Vamos mostrar que existe $R^k(p,q)$.
 
     Seja $N=R^{k-1}(R^k(p-1,q),R^k(p,q-1))+1$. Considere $K^N_k$ o hipergrafo $k$-uniforme completo de $N$ vértices e uma coloração $\chi$ de suas arestas.
 
-    Escolha um vértice qualquer $x$ e seja $S$ a coleção de todas as $(k-1)$-arestas que não contém $x$. $S$ define um hipergrafo $(k-1)-uniforme$ completo de $N-1$ vértices e possui uma coloração induzida por $\chi$ dada por $\chi'(e)=\chi(e\cup\{x\})$ para toda aresta $e$ de $S$. 
+    Escolha um vértice qualquer $x$ e seja $S$ a coleção de todas as $(k-1)$-arestas que não contêm $x$. $S$ define um hipergrafo $(k-1)$-uniforme completo de $N-1$ vértices e possui uma coloração induzida por $\chi$ dada por $\chi'(e)=\chi(e\cup\{x\})$ para toda aresta $e$ de $S$. 
     
     Pela escolha de $N$, podemos aplicar nossa hipótese de indução em $S$ e colcluir que vale:
     \begin{itemize}
@@ -192,7 +192,7 @@ Um \textbf{$k$-ágono} é o casco convexo de um conjunto de $k$ pontos em posiç
 
 Se $X$ for um subconjunto de $P$ de $k$ pontos em posição estritamente convexa tal que $conv(X)\cap P=X$, então  $conv(X)$ é um \textbf{$k$-buraco} ou um \textbf{$k$-ágono vazio}.
 
-Uma \textbf{triangulação} de um $k$-ágono $T$ é um conjunto de $3$-ágonos tal que os vértices dos $3$-ágonos também são vértices de $T$, $T$ é a união de todos os $3$-ágonos e a interseção de quaisquer dois $3$-ágonos é vazia ou um segmento de reta.
+Uma \textbf{triangulação} de um $k$-ágono $T$ é um conjunto de $3$-ágonos tal que os vértices dos $3$-ágonos também são vértices de $T$, $T$ é a união de todos os $3$-ágonos e a interseção de quaisquer dois $3$-ágonos tem área $0$.
 
 Chamamos $3$-ágonos de triângulos, $4$-ágonos de quadriláteros, $5$-ágonos de pentágonos, etc.
 
@@ -213,7 +213,7 @@ Vamos mostrar uma demonstração dada por \cite{ES} e, para isso, primeiro vamos
 
 Agora podemos demonstrar o teorema:
 \begin{proof}(Teorema de Erd\H os-Szekeres)
-    Dado um $k$ inteiro positivo, considere $P$ um conjunto com pelo menos $R^4(k,5)$ pontos em posição geral. Para cada subconjunto $X$ de $P$ de tamanho $4$, vamos colorir ele de vermelho se $conv(X)$ for um quadrilátero e de azul de $conv(X)$ for um triângulo. Pelo teorema de Ramsey para hipergrafos, uma das duas conddições é satisfeita:
+    Dado um $k$ inteiro positivo, considere $P$ um conjunto com pelo menos $R^4(k,5)$ pontos em posição geral. Para cada subconjunto $X$ de $P$ de tamanho $4$, vamos colorí-lo de vermelho se $conv(X)$ for um quadrilátero e de azul de $conv(X)$ for um triângulo. Pelo teorema de Ramsey para hipergrafos, uma das duas condições é satisfeita:
     \begin{itemize}
         \item $P$ tem um subconjunto de tamanho $k$ tal que todo subconjunto dele com 4 elementos é vermelho.
         \item $P$ tem um subconjunto de tamanho $5$ tal que todo subconjunto dele com 4 elementos é azul.
@@ -226,11 +226,37 @@ Agora podemos demonstrar o teorema:
 \end{proof}
 
 \subsection{Teorema de Sylvester-Gallai}
-Outro resultado interessante é o teorema de Sylvester-Gallai.
-\begin{teorema}   
-    Todo contunto finito de pontos tem todos os pontos colineares ou existe uma reta que passa por exatamente dois desses pontos.
+Outro resultado interessante é o teorema de Sylvester-Gallai. A seguinte demonstração é de \cite{Kelly1986}.
+
+
+\begin{teorema}
+    Todo conjunto finito de pontos tem todos os pontos colineares ou existe uma reta que passa por exatamente dois desses pontos.
 \end{teorema}
 \begin{proof}
+    Seja $P$ um conjunto finito de pontos no plano tal que $P$ não tem todos os pontos colineares e seja $\mathcal L$ o conjunto ds retas com pelo menos dois pontos de $P$.
 
+    Como $P$ é finito, existe $p\in P$ e $L\in\mathcal L$ tais que a distância de $p$ a $L$ é mínima.
+
+    Vamos mostrar que $|P\cap L|\leq 2$.
+    \begin{center}
+        \begin{tikzpicture}
+            \filldraw (0,2) circle[radius=1.5pt];
+            \node at (0.1,2.5) (p) {$p$};
+            \draw[dashed] (-4,0) -- (4,0);
+            \node at (-1,-0.5) (L) {$L$};
+            \filldraw (1,0) circle[radius=1.5pt];
+            \node at (1,0.5) (x) {$x$};
+            \filldraw (3,0) circle[radius=1.5pt];
+            \node at (3.1,0.5) (y) {$y$};
+            \draw[dashed] (4.5,-1) -- (-1.5,3);
+            \node at (1.5,1.5) (L') {$\overleftrightarrow{py}$};
+        \end{tikzpicture}
+    \end{center}
+
+    Suponha o contrário, que $P$ contém pelo menos 3 pontos em $L$.
+
+    A reta perpendicular a $L$ que passa por $p$ separa $L$ em duas semirretas. Uma dessas semirretas tem que conter pelo menos $2$ pontos de $P$, pois caso contrário $|P\cap L|\leq 2$. Vamos nomear esses pontos de $x$ e $y$, com $x$ mais próximo de $p$ do que $y$.
+
+    Mas então a distância $x$ a $\overleftrightarrow{py}$  é menor que a distância de $p$ a $L$, contrdizendo a escolha de $p$ e $L$.
 \end{proof}
 
