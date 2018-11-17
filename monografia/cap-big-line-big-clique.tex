@@ -193,7 +193,7 @@ Para $k,l$ inteiros positivos, seja $q(k,l)$ o menor inteiro tal que todo conjun
 
     Agora seja $f(k,l)$ o lado direito da igualdade. Primeiro vamos mostrar que $q(k,l)\geq f(k,l)$.
 
-    Se $k\geq5$ é ímpar, seja $P$ o conjunto de $(l-1)$ pontos a cada dois lados do $(k-1)$-ágono convexo, como mostrado na figura ($l=4$, $k=7$):
+    Se $k\geq5$ é ímpar, seja $P$ o conjunto de $(l-1)$ pontos a cada dois lados do $(k-1)$-ágono convexo (note que se não alternássemos os lados assim, teríamos um $k$-ágono estritamente convexo), como mostrado na figura ($l=4$, $k=7$):
     \begin{center}
         \begin{tikzpicture}
             \node[draw, shape=circle] (1) at (-1,0) {};
@@ -231,10 +231,59 @@ Para $k,l$ inteiros positivos, seja $q(k,l)$ o menor inteiro tal que todo conjun
 
     $P$ tem $\frac{1}{2}(l-1)(k-2)+1$ pontos sem $k$ pontos em posição estritamente convexa e nem $l$ pontos colineares. Então $q(k,l)>\frac{1}{2}(l-1)(k-2)+1$, ou seja, $q(k,l)\geq f(k,l)$.
 
-    Agora nós provamos que $q(k,l)\leq f(k,l)$ por indução.
+    Agora nós provamos que $q(k,l)\leq f(k,l)$ por indução em $k$ para $k,l\geq 4$.
 
-    \textbf {<< Não entendi essa parte da prova... >>}
+    Suponha que existam conjuntos com pelo menos $f(k,l)$ pontos sem $k$ pontos em posição extritamente convexa e sem $l$ pontos colineares e seja $P$ um conjunto assim.
 
+    Considere $v_1,v_2,...,v_m$ os vértices de $conv(P)$ nomeados em sentido horário, $v_0 = v_m$ e $v_{m+1}=v_1$. Seja $P_i=\overline{v_iv_{i+1}}\cap P$. Então $2\leq|P_i|\leq l-1$.
+
+    Se $P_i\geq 4$ para algum $P_i$, então $|P\setminus P_i|\geq f(k,l)-(l-1) = f(k-2,l)$. Por indução, $P\setminus P_i$ possui um conjunto $S$ em posição extrietamente convexa com $|S|=k-2$, já que $P$ e, por consequência, $S\subset P$, não possui $l$ pontos colineares. Assim, $S$ com mais dois pontos de $P_i\setminus\{v_i, v_{i+1}\}$ possui $k$ pontos em posição extritamente convexa, o que é uma contradição.
+
+    Então vamos assumir que $P_i\leq 3$ para todo $P_i$.
+
+    Se $P_i = 2$ para algum $P_i$, sejam $t,u,v,w,x,y$ pontos consecutivos de $P$ em sentido horário com $P_i=\{t,w\}$. Como $\{u,v,x,y\}$ estão em posiçã extritamente convexa, $k\geq 5$. Então $|P\setminus\{t,u,v,w,x,y\}|\geq f(k,l)-6 \geq f(k-4,l)$. Por indução, $P\setminus \{t,u,x,w,x,y\}$ possui um conjunto $S$ em posição extritamente convexa com $|S|=k-4$. Então, como $|P_{i-1}|\leq 3$ e $|P_{i+1}|\leq 3$, $S\cup\{u,v,w,x\}$ possui $k$ pontos em posição extritamente convexa, contradizendo a escolha de $P$.
+
+    Então vamos supor que para todo $P_i$, $|P_i|=3$. Assim $|P|=2m$. Seja $S$ o conjunto de um vértice de $P$ a cada dois unido aos pontos de $P$ que não são vértices, como ilustrado na figura com os pontos preenchidos pertencendo a $S$ (se $m$ for ímpar, deixamos dois vértices consecutivos fora de $S$):
+
+    \begin{center}
+        \begin{tikzpicture}
+            \node[draw, shape=circle] (1) at (-1,0) {};
+            \node[draw, shape=circle, fill] (2) at (0,0) {};
+            \node[draw, shape=circle, fill] (3) at (1,0) {};
+            \node[draw, shape=circle, fill] (4) at (1.7,0.7) {};
+            \node[draw, shape=circle] (5) at (2.4,1.4) {};
+            \node[draw, shape=circle, fill] (6) at (1.7,2.1) {};
+            \node[draw, shape=circle, fill] (7) at (1.0,2.8) {};
+            \node[draw, shape=circle, fill] (8) at (0,2.8) {};
+            \node[draw, shape=circle] (9) at (-1.0,2.8) {};
+            \node[draw, shape=circle, fill] (10) at (-1.7,2.1) {};
+            \node[draw, shape=circle, fill] (11) at (-2.4,1.4) {};
+            \node[draw, shape=circle, fill] (12) at (-1.7,0.7) {};
+
+            \path[draw] (12) -- (1) -- (2) -- (3) -- (4) -- (5) -- (6) -- (7) -- (8) -- (9) -- (10) -- (11) -- (12);
+        \end{tikzpicture}
+        \hspace{2cm}
+        \begin{tikzpicture}
+            \node[draw, circle] (1) at (0,1.5) {};
+            \node[draw, circle, fill] (2) at (0.71,0.98) {};
+            \node[draw, circle, fill] (3) at (1.43,0.46) {};
+            \node[draw, circle, fill] (4) at (1.18,-0.37) {};
+            \node[draw, circle] (5) at (0.88,-1.21) {};
+            \node[draw, circle, fill] (6) at (0,-1.21) {};
+            \node[draw, circle] (7) at (-0.88,-1.21) {};
+            \node[draw, circle, fill] (8) at (-1.18,-0.37) {};
+            \node[draw, circle, fill] (9) at (-1.43,0.46) {};
+            \node[draw, circle, fill] (10) at (-0.71,0.98) {};
+
+            \path[draw] (1) -- (2) -- (3) -- (4) -- (5) -- (6) -- (7) -- (8) -- (9) -- (10) -- (1);
+        \end{tikzpicture}
+    \end{center}
+    
+    Assim, $S$ está em posição estritamente convexa e $|S|\geq \frac{3|P|-2}{4}=\frac{1}{2}(3m-1)$. Temos que $|P|\geq f(k,l)$ e, como $l\geq 4$, $|P|\geq\frac{3k}{2}-1$. Como $P$ não tem $k$ pontos em posição estritamente convexa, $|S|\leq k-1$. Assim:
+
+    $$8(k-1)\geq 8|S| \geq 12m-4 = 6|P|-4 \geq 9k-10$$
+
+    Isso implica que $k\leq 2$, o que é uma contradição.
 \end{proof}
 
 Com isso, podemos generalizar o teorema de Erd\H os-Szekeres como foi feito por \cite{pentagon}.
